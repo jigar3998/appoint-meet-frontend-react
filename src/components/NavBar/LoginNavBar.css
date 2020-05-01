@@ -1,0 +1,12 @@
+.login-nav {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.login-nav-title {
+  color: black;
+  /* text-transform: uppercase; */
+  /* letter-spacing: 2px; */
+}

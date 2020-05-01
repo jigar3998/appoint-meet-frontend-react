@@ -1,0 +1,58 @@
+.signup-step-form-container {
+ width: 90%;
+  max-width: 700px;
+  height: 500px;
+  border: 1px solid #3171ca65;
+  margin: 8vh auto;
+  border-radius: 10px;
+  padding: 30px;
+  padding-top: 50px;
+  position: relative;
+}
+.signup-navigation-button{
+position: absolute;
+bottom: 0;
+margin-bottom: 20px;
+text-align: center;
+right: 0;
+width: 100%;
+}   
+.signup-navigation-button button{
+width: 100px;
+margin: 10px;
+}   
+.steps-content{
+    width: 90%;
+    max-width: 500px;
+    margin: 30px auto;
+}
+.select-time-day-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.add-staff-field{
+width: 49%;
+}
+.add-staff-field-container{
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding-right: 20px;
+  padding-left: 20px;
+
+}
+.dynamic-delete-button{
+  position: absolute;
+  right: 0; 
+  top: 8px;
+}
+.dynamic-delete-button svg{
+  width: 15px;
+  height: 15px;
+}
+.add-service-field{
+  width: 20%;
+}

@@ -1,0 +1,86 @@
+.login-outer {
+  height: 400px;
+  /* background-color: bisque; */
+  width: 80%;
+  margin: 15vh auto;
+  max-width: 800px;
+  border: 1px solid #3171ca2d;
+  border-radius: 10px;
+  display: flex;
+}
+.login-outer .login-left {
+  flex: 1;
+  background-color: #3171ca13;
+  height: 100%;
+}
+.login-right {
+  flex: 1;
+  /* background-color: blue; */
+}
+.input-field input,
+.input-field span {
+  background: #ecf3ff;
+  border-radius: 7px;
+}
+.input-field {
+  margin-bottom: 10px;
+}
+.input-field .ant-form-item-explain {
+  /* position: absolute;
+  top: 40px; */
+}
+.input-field #basic_username,
+.input-field .ant-input-password {
+  /* height: 40px; */
+}
+.login-form {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+}
+.login-form h1 {
+  font-weight: 600;
+}
+.login-form form {
+  width: 70%;
+}
+.login-submit-button {
+  margin: auto;
+  width: 100%;
+  border-radius: 7px;
+  /* height: 40px; */
+  /* background-color: var(--primary-color); */
+  margin-top: 10px;
+}
+.login-input-label {
+  margin-bottom: 5px;
+}
+
+.sign-up-outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+}
+.sign-up-outer .sign-up-options {
+  background-color: #3171ca1c;
+  padding: 15px;
+  margin: 10px;
+  width: 70%;
+  border-radius: 7px;
+  text-align: center;
+}
+.sign-up-outer p {
+  width: 70%;
+}
+.sign-up-outer .sign-up-options:last-child {
+  margin-bottom: 50px;
+}
+.sign-up-outer .sign-up-options:hover {
+  cursor: pointer;
+  background-color: #3171ca4b;
+}

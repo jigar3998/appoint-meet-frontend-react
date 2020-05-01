@@ -1,0 +1,15 @@
+.signup-outer {
+  /* height: 400px; */
+  /* background-color: bisque; */
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  width: 80%;
+  margin: 10vh auto;
+  max-width: 400px;
+  border: 1px solid #3171ca2d;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
