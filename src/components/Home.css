@@ -1,16 +1,18 @@
 .home-outer-first {
   display: flex;
-  height: 530px;
+  /* height: 530px; */
   width: 80%;
   margin: auto;
 }
 .home-left {
   flex: 1;
+  padding-bottom: 50px;
 }
 .home-right {
   flex: 1;
-  display: flex;
-  justify-content: center;
+  margin-top: 50px;
+  /* display: flex; */
+  /* justify-content: center; */
 }
 .home-left h1 {
   /* text-align: center; */
@@ -29,6 +31,6 @@
 }
 @media only screen and (max-width: 800px) {
   .home-outer-first {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 }

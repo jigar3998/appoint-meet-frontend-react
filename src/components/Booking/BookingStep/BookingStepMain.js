@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 
 import { Steps, Button, message } from "antd";
-import LoginNavBar from "../NavBar/LoginNavBar";
 
-import FirstStep from "./FirstStep";
-import SecondStep from "./SecondStep";
-import ThirdStep from "./ThirdStep";
-import FourthStep from "./FourthStep";
+import FirstBookingStep from "./FirstBookingStep";
+import SecondBookingStep from "./SecondBookingStep";
+import ThirdBookingStep from "./ThirdBookingStep";
+import FourthBookingStep from "./FourthBookingStep";
 
-import "./StepFormMain.css";
+import "./BookingStepMain.css";
 
 const { Step } = Steps;
 
-function StepFormMain() {
-  const [current, setCurrent] = useState(2);
+function BookingStepMain() {
+  const [current, setCurrent] = useState(0);
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
     window.addEventListener("resize", updateWindowDimensions);
@@ -34,36 +33,35 @@ function StepFormMain() {
   };
   const steps = [
     {
-      title: "Your Business",
-      content: <FirstStep next={next} />,
+      title: "Service",
+      content: <FirstBookingStep next={next} />,
     },
     {
-      title: "Timing",
-      content: <SecondStep next={next} />,
+      title: "Provider",
+      content: <SecondBookingStep next={next} prev={prev} />,
     },
     {
-      title: "Staff",
-      content: <ThirdStep next={next} />,
+      title: "Time",
+      content: <ThirdBookingStep next={next} prev={prev} />,
     },
     {
-      title: "Services",
-      content: <FourthStep />,
+      title: "Confirm",
+      content: <FourthBookingStep prev={prev} />,
     },
   ];
   return (
     <>
-      <LoginNavBar />
-      <div className="signup-step-form-container">
+      <div className="booking-step-form-container">
         <Steps
           progressDot
           current={current}
-          direction={width < 690 ? "vertical" : "horizontal"}
+          direction={width < 670 ? "vertical" : "horizontal"}
         >
           {steps.map((item) => (
             <Step key={item.title} title={item.title} />
           ))}
         </Steps>
-        <div className="steps-content">{steps[current].content}</div>
+        <div className="booking-steps-content">{steps[current].content}</div>
         <div className="steps-action">
           {/* <div className="signup-navigation-button">
             {current > 0 && <Button onClick={() => prev()}>Previous</Button>}
@@ -87,4 +85,4 @@ function StepFormMain() {
   );
 }
 
-export default StepFormMain;
+export default BookingStepMain;

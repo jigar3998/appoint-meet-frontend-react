@@ -84,7 +84,7 @@ function Login(props) {
                   htmlType="submit"
                   className="login-submit-button"
                 >
-                  Submit
+                  Login
                 </Button>
               </Form.Item>
             </Form>

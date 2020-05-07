@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import 'antd/dist/antd.less';
+import "antd/dist/antd.less";
 
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import ProviderForm from "./components/SignUpStepForm/StepFormMain";
+import BookingHome from "./components/Booking/BookingHome";
+import Dashboard from "./components/Provider/Dashboard";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
       <Route exact path="/signup-provider">
         <ProviderForm />
       </Route>
+      <Route exact path="/booking/:id" children={<BookingHome />} />
+      <Route exact path="/dashboard" children={<Dashboard />} />
     </Router>
   );
 }

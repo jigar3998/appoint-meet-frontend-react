@@ -18,7 +18,7 @@ function SignUp() {
       <LoginNavBar />
       <div className="signup-outer">
         <div className="login-right">
-          <div className="login-form">
+          <div className="login-form signup-form">
             <h1>Sign Up</h1>
             <br />
             <Form
@@ -108,7 +108,7 @@ function SignUp() {
                   htmlType="submit"
                   className="login-submit-button"
                 >
-                  Submit
+                  Sign Up
                 </Button>
               </Form.Item>
             </Form>

@@ -1,58 +1,106 @@
 .signup-step-form-container {
- width: 90%;
+  width: 90%;
   max-width: 700px;
-  height: 500px;
-  border: 1px solid #3171ca65;
+  min-height: 500px;
+  border: 1px solid #dadada;
   margin: 8vh auto;
   border-radius: 10px;
   padding: 30px;
   padding-top: 50px;
   position: relative;
 }
-.signup-navigation-button{
-position: absolute;
-bottom: 0;
-margin-bottom: 20px;
-text-align: center;
-right: 0;
-width: 100%;
-}   
-.signup-navigation-button button{
-width: 100px;
-margin: 10px;
-}   
-.steps-content{
-    width: 90%;
-    max-width: 500px;
-    margin: 30px auto;
+.signup-navigation-button {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  right: 0;
+  width: 100%;
 }
-.select-time-day-container{
+.signup-navigation-button button {
+  width: 100px;
+  margin: 10px;
+}
+.steps-content {
+  width: 90%;
+  max-width: 500px;
+  margin: 20px auto 30px;
+}
+.select-time-day-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
 }
-.add-staff-field{
-width: 49%;
+.add-staff-field {
+  width: 49%;
 }
-.add-staff-field-container{
+.add-staff-field-container {
   /* background-color: red; */
   display: flex;
   justify-content: space-between;
   position: relative;
-  padding-right: 20px;
+  padding-right: 25px;
   padding-left: 20px;
-
 }
-.dynamic-delete-button{
+.add-staff-field-container .ant-form-item {
+  margin-bottom: 10px;
+}
+.add-service-field-container {
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 10px;
+  padding-bottom: 0px;
+  /* padding-right: 20px; */
+  min-width: 460px;
+  margin-bottom: 10px;
+  border: 1px solid #3171ca65;
+  border-radius: 5px;
+}
+.add-service-field-container .ant-form-item {
+  margin-bottom: 10px;
+}
+.add-service-field-container .ant-form-item .ant-input-number {
+  width: 100%;
+}
+.dynamic-delete-button {
   position: absolute;
-  right: 0; 
+  right: 3px;
   top: 8px;
 }
-.dynamic-delete-button svg{
+.add-service-field-container .dynamic-delete-button {
+  position: absolute;
+  right: -8px;
+  top: 38px;
+  z-index: 9;
+  background-color: white;
+}
+.dynamic-delete-button svg {
   width: 15px;
   height: 15px;
 }
-.add-service-field{
+.add-service-field {
   width: 20%;
+}
+
+@media only screen and (max-width: 690px) {
+  .steps-content {
+    width: 100%;
+  }
+  .signup-step-form-container {
+    padding: 30px;
+  }
+}
+@media only screen and (max-width: 520px) {
+  .select-time-day-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .add-staff-field-container {
+    padding-right: 25px;
+    padding-left: 0px;
+  }
 }

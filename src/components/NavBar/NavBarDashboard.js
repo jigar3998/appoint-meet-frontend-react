@@ -2,20 +2,20 @@ import React from "react";
 
 import NavBarDropdown from "./NavBarDropdown";
 
-import "./NavBar.css";
+import "./NavBarDashboard.css";
 
-function NavBar() {
+function NavBarDashboard() {
   return (
     <nav class="main-nav-bar">
       <div className="nav-bar-container">
         <div className="nav-bar-logo">Appoint Meet</div>
         <div className="nav-bar-flex-1" />
         <div className="nav-bar-right">
-          {/* <NavBarDropdown /> */}
+          <NavBarDropdown />
         </div>
       </div>
     </nav>
   );
 }
 
-export default NavBar;
+export default NavBarDashboard;

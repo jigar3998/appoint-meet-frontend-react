@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { Form, Input, Button, Radio } from "antd";
 function FirstStep(props) {
-
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log(values);
-    props.next()
   };
   const submitForm1 = () => {
+    props.next();
     form.submit();
   };
   return (

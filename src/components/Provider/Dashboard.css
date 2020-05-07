@@ -1,0 +1,36 @@
+.dashboard-container {
+  width: 90%;
+  max-width: 1300px;
+  margin: 30px auto;
+}
+.dashboard-statistic {
+  padding: 20px;
+  display: flex;
+}
+.booking-url-container {
+  /* display: flex; */
+  padding: 15px;
+  margin-top: 20px;
+}
+.dashboard-list {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+.dashboard-list > div {
+  width: 32%;
+  height: 400px;
+  padding: 10px;
+  position: relative;
+}
+.dashboard-list > div p {
+  font-size: 16px;
+  text-align: center;
+}
+.dashboard-list > div hr {
+  border-width: 0px;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  margin: 0;
+  margin-right: 10px;
+  margin-left: 10px;
+}

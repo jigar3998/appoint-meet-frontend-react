@@ -1,4 +1,6 @@
 import React from "react";
+import { Button } from "antd";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import "./Home.css";
 
@@ -17,6 +19,11 @@ function Home() {
           Appoint-Meet is a simple minimal application to manage all of your
           appointment scheduling process for business and individuals
         </p>
+        <Link to="/login">
+          <Button type="primary" size="large">
+            Get Started
+          </Button>
+        </Link>
       </div>
       <div className="home-right">
         <img

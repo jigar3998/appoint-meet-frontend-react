@@ -1,61 +1,99 @@
 import React, { useEffect } from "react";
-import { Form, Input, Button, Col, Row, InputNumber } from "antd";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-
+import { Form, Input, Button, Col, Row, InputNumber, Select } from "antd";
+import {
+  CloseCircleOutlined,
+  PlusOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+const { Option } = Select;
 function FourthStep(props) {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log("Received values of form:", values);
-    props.next();
+    // props.next();
   };
   const submitForm4 = () => {
     form.submit();
   };
   const checkTime = (rule, value) => {
-    if(value){
-        if (value<5) {
-            return Promise.reject("Minimum 5 Minutes Required");
-        }
-        if (value>480) {
-            return Promise.reject("Maximum Minutes allowed is 480");
-        }
-        return Promise.resolve();
+    console.log(!value === undefined);
+    if (!(value === undefined)) {
+      if (value < 5) {
+        return Promise.reject("Minimum 5 Minutes Required");
+      }
+      if (value > 480) {
+        return Promise.reject("Maximum Minutes allowed is 480");
+      }
+      return Promise.resolve();
+    } else {
+      return Promise.reject("Required");
     }
-    else{
-        return Promise.reject("Required");
-
-    }
-    
   };
   const checkPrice = (rule, value) => {
-    if(value){
-        return Promise.resolve();
+    if (!(value === undefined)) {
+      return Promise.resolve();
+    } else {
+      return Promise.reject("Required");
     }
-    else{
-        return Promise.reject("Required");
-
-    }
-    
   };
   useEffect(() => {
     document.getElementById("add-staff-button").click();
   }, []);
+
+  const children = [];
+  const all = [];
+
+  for (let i = 10; i < 36; i++) {
+    let key = i.toString(36) + i + "key";
+    children.push(
+      <Option key={key}>
+        <UserOutlined /> {" " + i.toString(36) + i}
+      </Option>
+    );
+    all.push(key);
+  }
+  let x = [];
+  x[1] = {
+    "staff-list": ["a10key"],
+  };
+  // const handleChange = (value) => {
+  //   console.log(value);
+  //   form.setFieldsValue({
+  //     services: x,
+  //   });
+  //   console.log(value);
+  //   console.log(form.getFieldValue());
+  // };
+  const handleOnSelect = (value, fieldKey) => {
+    if (value == "select-all") {
+      let formAllData = form.getFieldValue().services;
+      console.log(formAllData[fieldKey], all.length);
+      if (formAllData[fieldKey]["staff-list"].length == all.length + 1) {
+        formAllData[fieldKey]["staff-list"] = [];
+      } else {
+        formAllData[fieldKey]["staff-list"] = all;
+      }
+      form.setFieldsValue({
+        services: formAllData,
+      });
+    }
+  };
+
   return (
-    <div style={{ overflow: "auto", height: "300px" }}>
+    <div style={{ overflow: "auto", height: "320px", paddingRight: "10px" }}>
       <Form form={form} name="dynamic_form_item" onFinish={onFinish}>
         <Form.List name="services">
           {(fields, { add, remove }) => {
             return (
               <div>
                 {fields.map((field, index) => (
-                  <Row key={field.key} className="add-staff-field-container">
+                  <Row key={field.key} className="add-service-field-container">
                     <Col className="add-service-field" style={{ width: "55%" }}>
                       <Form.Item
                         name={[field.name, "serviceName"]}
                         fieldKey={[field.fieldKey, "serviceName"]}
-                        // validateTrigger={["onChange", "onBlur"]}
-
+                        validateTrigger={["onChange", "onBlur"]}
                         rules={[
                           {
                             required: true,
@@ -78,9 +116,7 @@ function FourthStep(props) {
                           },
                         ]}
                       >
-                        <InputNumber
-                          placeholder="Time (min)"
-                        />
+                        <InputNumber placeholder="Time (min)" />
                       </Form.Item>
                     </Col>
                     <Col className="add-service-field">
@@ -89,17 +125,42 @@ function FourthStep(props) {
                         fieldKey={[field.fieldKey, "price"]}
                         validateTrigger={["onChange", "onBlur"]}
                         rules={[
-                            {
-                              validator: checkPrice,
-                            },
-                          ]}
+                          {
+                            validator: checkPrice,
+                          },
+                        ]}
                       >
                         <InputNumber placeholder="Price" min={0} />
                       </Form.Item>
                     </Col>
-
+                    <Form.Item
+                      style={{ width: "100%" }}
+                      name={[field.name, "staff-list"]}
+                      fieldKey={[field.fieldKey, "price"]}
+                      validateTrigger={["onChange", "onBlur"]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Select At Least lest One Staff Member",
+                        },
+                      ]}
+                    >
+                      <Select
+                        loading
+                        maxTagTextLength={30}
+                        maxTagCount={10}
+                        mode="multiple"
+                        style={{ width: "100%" }}
+                        placeholder="Please select Staff"
+                        // onChange={handleChange}
+                        onSelect={(key) => handleOnSelect(key, field.key)}
+                      >
+                        <Option key="select-all">Select All</Option>
+                        {children}
+                      </Select>
+                    </Form.Item>
                     {fields.length > 1 ? (
-                      <MinusCircleOutlined
+                      <CloseCircleOutlined
                         className="dynamic-delete-button"
                         onClick={() => {
                           remove(field.name);
@@ -131,7 +192,7 @@ function FourthStep(props) {
       </Form>
       <div className="signup-navigation-button">
         <Button type="primary" onClick={submitForm4}>
-          Next
+          Done
         </Button>
       </div>
     </div>

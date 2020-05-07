@@ -16,16 +16,15 @@ function SecondStep(props) {
   ];
   const onFinish = (values) => {
     console.log("Success:", values);
-    props.next()
-
   };
   const submitForm2 = () => {
+    props.next();
     form.submit();
   };
   return (
     <div>
       <Form
-      form={form}
+        form={form}
         onFinish={onFinish}
         layout="inline"
         initialValues={{
@@ -70,16 +69,10 @@ function SecondStep(props) {
           return (
             <div className="select-time-day-container">
               <Form.Item name={`${day}`} valuePropName="checked">
-                <Checkbox
-                >
-                  {day}
-                </Checkbox>
+                <Checkbox>{day}</Checkbox>
               </Form.Item>
               <Form.Item name={`${day}-time`}>
-                <RangePicker
-                  allowClear={false}
-                  format={["h:mm a", "h:mm a"]}
-                />
+                <RangePicker allowClear={false} format={["h:mm a", "h:mm a"]} />
               </Form.Item>
             </div>
           );

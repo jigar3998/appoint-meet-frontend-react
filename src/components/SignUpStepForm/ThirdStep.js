@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { Form, Input, Button, Col, Row } from "antd";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 function ThirdStep(props) {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log("Received values of form:", values);
-    props.next();
   };
   const submitForm3 = () => {
+    props.next();
     form.submit();
   };
   useEffect(() => {
@@ -17,7 +17,7 @@ function ThirdStep(props) {
   }, []);
 
   return (
-    <div style={{ overflow: "auto", height: "300px" }}>
+    <div style={{ overflow: "auto", height: "320px" }}>
       <Form form={form} name="dynamic_form_item" onFinish={onFinish}>
         <Form.List name="staff">
           {(fields, { add, remove }) => {
@@ -29,8 +29,7 @@ function ThirdStep(props) {
                       <Form.Item
                         name={[field.name, "lastName"]}
                         fieldKey={[field.fieldKey, "lastName"]}
-                        // validateTrigger={["onChange", "onBlur"]}
-
+                        validateTrigger={["onChange", "onBlur"]}
                         rules={[
                           {
                             required: true,
@@ -59,7 +58,7 @@ function ThirdStep(props) {
                       </Form.Item>
                     </Col>
                     {fields.length > 1 ? (
-                      <MinusCircleOutlined
+                      <CloseCircleOutlined
                         className="dynamic-delete-button"
                         onClick={() => {
                           remove(field.name);

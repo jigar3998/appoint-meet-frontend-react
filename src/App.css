@@ -1,4 +1,3 @@
-
 :root {
   --primary-color: #3171ca;
   --primary-color-dark: #1159be;
@@ -9,4 +8,35 @@
 html,
 body {
   box-sizing: border-box;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #c5c5c5;
+}
+
+body {
+  /* background-color: #f1f3f6 !important; */
+}
+
+.container-border {
+  /* border: 1px solid #3171ca65; */
+  border-radius: 5px;
+  /* background: #ffffff;
+  box-shadow: 5px 5px 15px #e8e8e8, -5px -5px 15px #ffffff; */
+  background: #ffffff;
+  box-shadow: 5px 5px 12px #dedede, -5px -5px 12px #ffffff;
+  /* border: 1px solid #dadada; */
 }
