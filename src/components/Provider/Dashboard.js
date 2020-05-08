@@ -8,6 +8,9 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import ExternalLink from "../../asserts/external-link.svg";
 
+import ServicesTable from "../DataDisplay/ServicesTable";
+import ProviderTable from "../DataDisplay/ProviderTable";
+
 function Dashboard() {
   return (
     <>
@@ -45,9 +48,9 @@ function Dashboard() {
           </div>
         </div>
         <div className="booking-url-container container-border">
-          Your Booking Url:google.com
+          Your Booking Url:http://localhost:3000/booking/business
           <CopyToClipboard
-            text={"google.com"}
+            text={"http://localhost:3000/booking/business"}
             onCopy={() => message.success("Copied")}
           >
             <CopyOutlined style={{ fontSize: "21px", float: "right" }} />
@@ -55,7 +58,7 @@ function Dashboard() {
         </div>
         <div className="dashboard-list">
           <div className="container-border">
-            <p>Upcoming Appointments</p>
+            <div className="dashboard-list-title">Upcoming Appointments</div>
 
             <img
               alt="link"
@@ -71,7 +74,7 @@ function Dashboard() {
             <hr />
           </div>
           <div className="container-border">
-            <p>Your Services</p>
+            <div className="dashboard-list-title">Your Services</div>
             <img
               alt="link"
               src={ExternalLink}
@@ -84,9 +87,14 @@ function Dashboard() {
               }}
             />
             <hr />
+            <ServicesTable
+              bordered={true}
+              pagination={{ pageSize: 5 }}
+              tableWidth={[70, 40, 40]}
+            />
           </div>
           <div className="container-border">
-            <p>Your Staff</p>
+            <div className="dashboard-list-title">Your Staff</div>
             <img
               alt="link"
               src={ExternalLink}
@@ -99,6 +107,11 @@ function Dashboard() {
               }}
             />
             <hr />
+            <ProviderTable
+              bordered={true}
+              pagination={{ pageSize: 5 }}
+              tableWidth={[100, 100]}
+            />
           </div>
         </div>
       </div>
