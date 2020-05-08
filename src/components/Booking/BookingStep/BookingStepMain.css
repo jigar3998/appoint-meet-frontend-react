@@ -8,10 +8,7 @@
   /* padding-top: 20px; */
   /* height: 300px; */
 }
-.service-div-container {
-  height: 360px;
-  overflow: auto;
-}
+
 .service-container .service-title {
   text-align: center;
   font-size: 18px;
@@ -19,26 +16,13 @@
   margin-bottom: 10px;
   margin-top: 10px;
 }
-.service-container .service-div {
-  text-align: center;
-  width: 80%;
-  max-width: 400px;
-  margin: 7px auto;
-  border: 1px solid #3171ca49;
-  padding: 10px;
-  border-radius: 5px;
+.service-div-container {
+  height: 100px;
+  width: 100%;
+  max-width: 850px;
+  margin: auto;
 }
-.service-container .service-div:hover,
-.time-slots div:hover {
-  background-color: #3171ca;
-  color: white;
-  cursor: pointer;
-}
-.service-selected {
-  background-color: #3171ca;
-  color: white;
-  cursor: pointer;
-}
+
 .select-time-step {
   display: flex;
   flex-direction: row;
@@ -54,7 +38,17 @@
 
   /* margin-top: 30px; */
 }
-
+.service-container .service-div:hover,
+.time-slots div:hover {
+  background-color: #3171ca;
+  color: white;
+  cursor: pointer;
+}
+.service-selected {
+  background-color: #3171ca;
+  color: white;
+  cursor: pointer;
+}
 .select-date-container-title {
   margin-top: 15px;
   text-align: center;
@@ -90,10 +84,6 @@
   height: 400px;
 }
 @media only screen and (max-width: 670px) {
-  .service-div-container {
-    height: 300px;
-    margin-bottom: 10px;
-  }
 }
 @media only screen and (max-width: 675px) {
   .select-time-step {

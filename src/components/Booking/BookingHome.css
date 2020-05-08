@@ -1,7 +1,7 @@
 .business-home-container {
   display: flex;
   width: 90%;
-  margin: 40px auto;
+  margin: 30px auto;
   max-width: 1200px;
 }
 
@@ -9,7 +9,7 @@
   border: 1px solid #dadada;
   border-radius: 5px;
   margin: 10px;
-  height: 550px;
+  height: 570px;
   flex: 1;
   padding: 20px;
 }
@@ -18,7 +18,7 @@
   border-radius: 5px;
   flex: 5;
   margin: 10px;
-  min-height: 550px;
+  min-height: 570px;
   padding: 10px;
   padding-top: 30px;
   position: relative;
