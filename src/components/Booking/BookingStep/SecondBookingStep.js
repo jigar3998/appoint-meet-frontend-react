@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Form, Input, Button, Radio, Table, Space } from "antd";
 
-import ProviderTable from "../../DataDisplay/ProviderTable";
+import ProviderTable from "../../DataDisplay/StaffTable";
 function SecondBookingStep(props) {
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -22,7 +22,7 @@ function SecondBookingStep(props) {
 
   return (
     <div className="service-container">
-      <div className="service-title">Select Provider</div>
+      <div className="service-title">Select Staff</div>
       <div className="service-div-container">
         <ProviderTable
           rowSelection={{

@@ -9,7 +9,8 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import ExternalLink from "../../asserts/external-link.svg";
 
 import ServicesTable from "../DataDisplay/ServicesTable";
-import ProviderTable from "../DataDisplay/ProviderTable";
+import ProviderTable from "../DataDisplay/StaffTable";
+import AppointmentTable from "../DataDisplay/AppointmentTable";
 
 function Dashboard() {
   return (
@@ -57,61 +58,70 @@ function Dashboard() {
           </CopyToClipboard>
         </div>
         <div className="dashboard-list">
-          <div className="container-border">
-            <div className="dashboard-list-title">Upcoming Appointments</div>
+          <div className="dashboard-list-left">
+            <div className="container-border">
+              <div className="dashboard-list-title">Upcoming Appointments</div>
 
-            <img
-              alt="link"
-              src={ExternalLink}
-              style={{
-                position: "absolute",
-                top: "15px",
-                right: "15px",
-                width: "20px",
-                height: "20px",
-              }}
-            />
-            <hr />
+              <img
+                alt="link"
+                src={ExternalLink}
+                style={{
+                  position: "absolute",
+                  top: "15px",
+                  right: "15px",
+                  width: "20px",
+                  height: "20px",
+                }}
+              />
+              <hr />
+              <AppointmentTable
+                bordered={true}
+                pagination={{ pageSize: 14 }}
+                tableWidth={[100, 70, 70, 50, 50]}
+              />
+            </div>
           </div>
-          <div className="container-border">
-            <div className="dashboard-list-title">Your Services</div>
-            <img
-              alt="link"
-              src={ExternalLink}
-              style={{
-                position: "absolute",
-                top: "15px",
-                right: "15px",
-                width: "20px",
-                height: "20px",
-              }}
-            />
-            <hr />
-            <ServicesTable
-              bordered={true}
-              pagination={{ pageSize: 5 }}
-              tableWidth={[70, 40, 40]}
-            />
-          </div>
-          <div className="container-border">
-            <div className="dashboard-list-title">Your Staff</div>
-            <img
-              alt="link"
-              src={ExternalLink}
-              style={{
-                position: "absolute",
-                top: "15px",
-                right: "15px",
-                width: "20px",
-                height: "20px",
-              }}
-            />
-            <hr />
-            <ProviderTable
-              bordered={true}
-              pagination={{ pageSize: 5 }}
-              tableWidth={[100, 100]}
-            />
+          <div className="dashboard-list-right">
+            <div className="container-border">
+              <div className="dashboard-list-title">Your Services</div>
+              <img
+                alt="link"
+                src={ExternalLink}
+                style={{
+                  position: "absolute",
+                  top: "15px",
+                  right: "15px",
+                  width: "20px",
+                  height: "20px",
+                }}
+              />
+              <hr />
+              <ServicesTable
+                bordered={true}
+                pagination={{ pageSize: 5 }}
+                tableWidth={[70, 40, 40]}
+              />
+            </div>
+            <div className="container-border">
+              <div className="dashboard-list-title">Your Staff</div>
+              <img
+                alt="link"
+                src={ExternalLink}
+                style={{
+                  position: "absolute",
+                  top: "15px",
+                  right: "15px",
+                  width: "20px",
+                  height: "20px",
+                }}
+              />
+              <hr />
+              <ProviderTable
+                bordered={true}
+                pagination={{ pageSize: 5 }}
+                tableWidth={[100, 100]}
+              />
+            </div>
           </div>
         </div>
       </div>

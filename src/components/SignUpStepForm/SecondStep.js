@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox, TimePicker, Form, Input, Button } from "antd";
 import moment from "moment";
 const { RangePicker } = TimePicker;
 function SecondStep(props) {
   const [form] = Form.useForm();
+  const [selectedDays, setSelectedDays] = useState({
+    Monday: true,
+    Tuesday: true,
+    Wednesday: true,
+    Thursday: true,
+    Friday: true,
+    Saturday: false,
+    Sunday: false,
+  });
 
   const list = [
     "Monday",
@@ -21,6 +30,12 @@ function SecondStep(props) {
     props.next();
     form.submit();
   };
+  const onSelectChange = (value) => {
+    setSelectedDays({
+      ...selectedDays,
+      [value.target.id]: value.target.checked,
+    });
+  };
   return (
     <div>
       <Form
@@ -28,13 +43,7 @@ function SecondStep(props) {
         onFinish={onFinish}
         layout="inline"
         initialValues={{
-          Monday: true,
-          Tuesday: true,
-          Wednesday: true,
-          Thursday: true,
-          Friday: true,
-          Saturday: false,
-          Sunday: false,
+          ...selectedDays,
           "Monday-time": [
             moment("9:00 am", "h:mm a"),
             moment("5:00 pm", "h:mm a"),
@@ -68,11 +77,19 @@ function SecondStep(props) {
         {list.map((day) => {
           return (
             <div className="select-time-day-container">
-              <Form.Item name={`${day}`} valuePropName="checked">
+              <Form.Item
+                name={`${day}`}
+                valuePropName="checked"
+                onChange={onSelectChange}
+              >
                 <Checkbox>{day}</Checkbox>
               </Form.Item>
               <Form.Item name={`${day}-time`}>
-                <RangePicker allowClear={false} format={["h:mm a", "h:mm a"]} />
+                <RangePicker
+                  allowClear={false}
+                  format={["h:mm a", "h:mm a"]}
+                  disabled={!selectedDays[day]}
+                />
               </Form.Item>
             </div>
           );

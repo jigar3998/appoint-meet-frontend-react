@@ -37,7 +37,7 @@ function BookingStepMain() {
       content: <FirstBookingStep next={next} />,
     },
     {
-      title: "Provider",
+      title: "Staff",
       content: <SecondBookingStep next={next} prev={prev} />,
     },
     {

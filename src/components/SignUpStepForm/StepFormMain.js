@@ -13,7 +13,7 @@ import "./StepFormMain.css";
 const { Step } = Steps;
 
 function StepFormMain() {
-  const [current, setCurrent] = useState(2);
+  const [current, setCurrent] = useState(1);
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
     window.addEventListener("resize", updateWindowDimensions);

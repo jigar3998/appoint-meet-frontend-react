@@ -1,7 +1,7 @@
 .dashboard-container {
   width: 90%;
   max-width: 1300px;
-  margin: 30px auto;
+  margin: 30px auto 10px;
 }
 .dashboard-statistic {
   padding: 20px;
@@ -17,13 +17,28 @@
   margin-top: 20px;
   justify-content: space-between;
 }
-.dashboard-list > div {
-  width: 32%;
-  /* height: 460px; */
+.dashboard-list .dashboard-list-left > div,
+.dashboard-list .dashboard-list-right > div {
+  /* width: 32%; */
   padding: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
   position: relative;
+}
+.dashboard-list .dashboard-list-right > div {
+  margin-bottom: 20px;
+  height: 490px;
+}
+.dashboard-list .dashboard-list-left > div {
+  height: 1000px;
+}
+.dashboard-list .dashboard-list-left {
+  flex: 1.8;
+  margin-right: 10px;
+}
+.dashboard-list .dashboard-list-right {
+  flex: 1;
+  margin-left: 10px;
 }
 .dashboard-list .dashboard-list-title {
   font-size: 16px;

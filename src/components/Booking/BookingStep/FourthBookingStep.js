@@ -8,7 +8,7 @@ function FourthBookingStep(props) {
         <Descriptions.Item label="Service" span={3}>
           just photo
         </Descriptions.Item>
-        <Descriptions.Item label="Provider" span={3}>
+        <Descriptions.Item label="Staff" span={3}>
           business name
         </Descriptions.Item>
         <Descriptions.Item label="price" span={3}>
