@@ -11,7 +11,7 @@ function FirstStep(props) {
     form.submit();
   };
   return (
-    <div>
+    <div className="business-info">
       <Form onFinish={onFinish} layout="vertical" hideRequiredMark form={form}>
         <Form.Item
           name="business-name"
@@ -38,6 +38,18 @@ function FirstStep(props) {
           <Input />
         </Form.Item>
         <Form.Item
+          name="business-description"
+          label="Business Description"
+          rules={[
+            {
+              required: true,
+              message: "Business description is required",
+            },
+          ]}
+        >
+          <Input.TextArea autoSize />
+        </Form.Item>
+        <Form.Item
           name="business-address"
           label="Business address"
           rules={[
@@ -47,7 +59,7 @@ function FirstStep(props) {
             },
           ]}
         >
-          <Input.TextArea />
+          <Input.TextArea autoSize />
         </Form.Item>
         {/* <Form.Item>
           <Button type="primary" onClick={submitForm1}>

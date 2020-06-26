@@ -1,0 +1,22 @@
+.services-container{
+    width: 90%;
+    max-width: 1300px;
+    margin: 30px auto 10px;
+    padding: 20px;
+    padding-left: 3%;
+    padding-right: 3%;
+    position: relative;
+}
+.services-list-title{
+    font-size: 18px;
+    /* text-align: center; */
+    margin-bottom: 20px;
+    display: flex;
+}
+.services-add-button{
+
+}
+.service-table{
+    /* width: 95%;
+    margin: auto; */
+}

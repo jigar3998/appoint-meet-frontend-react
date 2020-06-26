@@ -45,11 +45,3 @@
   text-align: center;
   margin-bottom: 10px;
 }
-.dashboard-list > div hr {
-  border-width: 0px;
-  border-bottom: 1px solid rgb(221, 221, 221);
-  margin: 0;
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-bottom: 10px;
-}

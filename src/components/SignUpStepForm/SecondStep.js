@@ -14,7 +14,7 @@ function SecondStep(props) {
     Sunday: false,
   });
 
-  const list = [
+  const daysList = [
     "Monday",
     "Tuesday",
     "Wednesday",
@@ -24,6 +24,13 @@ function SecondStep(props) {
     "Sunday",
   ];
   const onFinish = (values) => {
+    for (let i of daysList) {
+      // console.log(values[`${i}Time`]);
+      values[`${i}Time`][0] =
+        values[`${i}Time`][0].hours() + ":" + values[`${i}Time`][0].minutes();
+      values[`${i}Time`][1] =
+        values[`${i}Time`][1].hours() + ":" + values[`${i}Time`][1].minutes();
+    }
     console.log("Success:", values);
   };
   const submitForm2 = () => {
@@ -44,37 +51,37 @@ function SecondStep(props) {
         layout="inline"
         initialValues={{
           ...selectedDays,
-          "Monday-time": [
+          MondayTime: [
             moment("9:00 am", "h:mm a"),
             moment("5:00 pm", "h:mm a"),
           ],
-          "Tuesday-time": [
+          TuesdayTime: [
             moment("9:00 am", "h:mm a"),
             moment("5:00 pm", "h:mm a"),
           ],
-          "Wednesday-time": [
+          WednesdayTime: [
             moment("9:00 am", "h:mm a"),
             moment("5:00 pm", "h:mm a"),
           ],
-          "Thursday-time": [
+          ThursdayTime: [
             moment("9:00 am", "h:mm a"),
             moment("5:00 pm", "h:mm a"),
           ],
-          "Friday-time": [
+          FridayTime: [
             moment("9:00 am", "h:mm a"),
             moment("5:00 pm", "h:mm a"),
           ],
-          "Saturday-time": [
+          SaturdayTime: [
             moment("9:00 am", "h:mm a"),
             moment("5:00 pm", "h:mm a"),
           ],
-          "Sunday-time": [
+          SundayTime: [
             moment("9:00 am", "h:mm a"),
             moment("5:00 pm", "h:mm a"),
           ],
         }}
       >
-        {list.map((day) => {
+        {daysList.map((day) => {
           return (
             <div className="select-time-day-container">
               <Form.Item
@@ -84,7 +91,7 @@ function SecondStep(props) {
               >
                 <Checkbox>{day}</Checkbox>
               </Form.Item>
-              <Form.Item name={`${day}-time`}>
+              <Form.Item name={`${day}Time`}>
                 <RangePicker
                   allowClear={false}
                   format={["h:mm a", "h:mm a"]}

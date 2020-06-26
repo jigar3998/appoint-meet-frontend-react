@@ -13,7 +13,7 @@ import "./StepFormMain.css";
 const { Step } = Steps;
 
 function StepFormMain() {
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(0);
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
     window.addEventListener("resize", updateWindowDimensions);
@@ -39,7 +39,7 @@ function StepFormMain() {
     },
     {
       title: "Timing",
-      content: <SecondStep next={next} />,
+      content: <SecondStep next={prev} />,
     },
     {
       title: "Staff",

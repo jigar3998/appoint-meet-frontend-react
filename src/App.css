@@ -36,7 +36,16 @@ body {
   border-radius: 5px;
   /* background: #ffffff;
   box-shadow: 5px 5px 15px #e8e8e8, -5px -5px 15px #ffffff; */
-  background: #ffffff;
-  box-shadow: 5px 5px 12px #dedede, -5px -5px 12px #ffffff;
-  /* border: 1px solid #dadada; */
+  /* background: #ffffff;
+  box-shadow: 5px 5px 12px #dedede, -5px -5px 12px #ffffff; */
+  border: 1px solid #dadada;
 }
+hr {
+  border-width: 0px;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  margin: 0;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+

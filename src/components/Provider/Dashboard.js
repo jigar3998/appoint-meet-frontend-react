@@ -9,8 +9,10 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import ExternalLink from "../../asserts/external-link.svg";
 
 import ServicesTable from "../DataDisplay/ServicesTable";
-import ProviderTable from "../DataDisplay/StaffTable";
+import StaffTable from "../DataDisplay/StaffTable";
 import AppointmentTable from "../DataDisplay/AppointmentTable";
+
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function Dashboard() {
   return (
@@ -49,7 +51,7 @@ function Dashboard() {
           </div>
         </div>
         <div className="booking-url-container container-border">
-          Your Booking Url:http://localhost:3000/booking/business
+          Your Booking Url : http://localhost:3000/booking/business
           <CopyToClipboard
             text={"http://localhost:3000/booking/business"}
             onCopy={() => message.success("Copied")}
@@ -61,18 +63,20 @@ function Dashboard() {
           <div className="dashboard-list-left">
             <div className="container-border">
               <div className="dashboard-list-title">Upcoming Appointments</div>
+              <Link to="/appointment">
+                <img
+                  alt="link"
+                  src={ExternalLink}
+                  style={{
+                    position: "absolute",
+                    top: "15px",
+                    right: "15px",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />
+              </Link>
 
-              <img
-                alt="link"
-                src={ExternalLink}
-                style={{
-                  position: "absolute",
-                  top: "15px",
-                  right: "15px",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
               <hr />
               <AppointmentTable
                 bordered={true}
@@ -84,17 +88,20 @@ function Dashboard() {
           <div className="dashboard-list-right">
             <div className="container-border">
               <div className="dashboard-list-title">Your Services</div>
-              <img
-                alt="link"
-                src={ExternalLink}
-                style={{
-                  position: "absolute",
-                  top: "15px",
-                  right: "15px",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
+              <Link to="/services">
+                <img
+                  alt="link"
+                  src={ExternalLink}
+                  style={{
+                    position: "absolute",
+                    top: "15px",
+                    right: "15px",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />
+              </Link>
+
               <hr />
               <ServicesTable
                 bordered={true}
@@ -104,19 +111,22 @@ function Dashboard() {
             </div>
             <div className="container-border">
               <div className="dashboard-list-title">Your Staff</div>
-              <img
-                alt="link"
-                src={ExternalLink}
-                style={{
-                  position: "absolute",
-                  top: "15px",
-                  right: "15px",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
+              <Link to="/staff">
+                <img
+                  alt="link"
+                  src={ExternalLink}
+                  style={{
+                    position: "absolute",
+                    top: "15px",
+                    right: "15px",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />
+              </Link>
+
               <hr />
-              <ProviderTable
+              <StaffTable
                 bordered={true}
                 pagination={{ pageSize: 5 }}
                 tableWidth={[100, 100]}

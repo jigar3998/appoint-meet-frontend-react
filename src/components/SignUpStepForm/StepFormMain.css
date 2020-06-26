@@ -26,6 +26,10 @@
   max-width: 500px;
   margin: 20px auto 30px;
 }
+.business-info .ant-form-item{
+  margin-bottom: 15px;
+
+}
 .select-time-day-container {
   width: 100%;
   display: flex;
