@@ -1,6 +1,6 @@
 import React from "react";
 
-import NavBarDropdown from "./NavBarDropdown";
+import NavBarDropdown from "./NavBarBusinessDropdown";
 
 import "./NavBar.css";
 

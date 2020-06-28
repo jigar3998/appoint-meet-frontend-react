@@ -1,6 +1,12 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link,useHistory } from "react-router-dom";
-import { Form, Input, Button, Checkbox,message } from "antd";
+import React, { useState, useContext } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+} from "react-router-dom";
+import { Form, Input, Button, Checkbox, message } from "antd";
 import LoginNavBar from "./NavBar/LoginNavBar";
 
 import "./Login.css";
@@ -9,9 +15,12 @@ import axios from "axios";
 
 import { Url } from "../Constants/ServerUrl";
 
+import { GlobalContext } from "../context/GlobalState";
+
 function Login(props) {
   let history = useHistory();
-  
+  const contextData = useContext(GlobalContext);
+
   const [invalidLoginMessage, setInvalidLoginMessage] = useState(false);
   const [loading, setLoading] = useState(false);
   const onFinish = (values) => {
@@ -20,21 +29,35 @@ function Login(props) {
     console.log("Success:", values);
     axios
       .post(Url + "/users/login", {
-        id: "2",
-        pass: "user1",
+        email: values.email,
+        pass: values.password,
       })
       .then(function (response) {
-        console.log(response);
+        setLoading(false);
+        console.log(response.data);
+
+        if (response.data.access === "customer") {
+          contextData.setLoginData(response.data);
+          history.push("/customer/dashboard");
+        } else if (response.data.access === "business") {
+          contextData.setLoginData(response.data);
+          if (response.data.business_id === undefined) {
+            history.push("/business/business-info");
+          } else {
+            history.push("/business/dashboard");
+          }
+        } else {
+          message.error("Something went wrong. Please try again");
+        }
       })
       .catch(function (error) {
         console.log(error.response.status);
         if (error.response && error.response.status === 400) {
-          setInvalidLoginMessage(true);
           setLoading(false);
+        } else {
+          message.error("Something went wrong. Please try again");
         }
-        else{
-          message.error('Something went wrong. Please try again');
-        }
+        setInvalidLoginMessage(true);
       });
   };
 
@@ -46,11 +69,11 @@ function Login(props) {
           <div className="sign-up-outer">
             {/* <h1>Sign Up</h1> */}
             <h2>Don’t have an account yet?</h2>
-            <Link to="/signup?type=provider" className="sign-up-options">
+            <Link to="/signup?type=business" className="sign-up-options">
               Sign Up as a Service Provider
             </Link>
-            <Link to="/signup?type=user" className="sign-up-options">
-              Sign Up as a User
+            <Link to="/signup?type=customer" className="sign-up-options">
+              Sign Up as a Customer
             </Link>
           </div>
         </div>
@@ -87,10 +110,6 @@ function Login(props) {
                   {
                     required: true,
                     message: "Please input your password!",
-                  },
-                  {
-                    min: 8,
-                    message: "Password must have at least 8 characters",
                   },
                   {
                     max: 50,

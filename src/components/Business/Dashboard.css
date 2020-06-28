@@ -1,15 +1,17 @@
 .dashboard-container {
-  width: 90%;
+  width: 92%;
   max-width: 1300px;
   margin: 30px auto 10px;
 }
 .dashboard-statistic {
   padding: 20px;
   display: flex;
+  margin:10px
 }
 .booking-url-container {
   /* display: flex; */
   padding: 15px;
+  margin:10px;
   margin-top: 20px;
 }
 .dashboard-list {
@@ -27,21 +29,31 @@
 }
 .dashboard-list .dashboard-list-right > div {
   margin-bottom: 20px;
-  height: 490px;
+  height: 460px;
 }
 .dashboard-list .dashboard-list-left > div {
-  height: 1000px;
+  height: 940px;
 }
 .dashboard-list .dashboard-list-left {
   flex: 1.8;
-  margin-right: 10px;
+  margin: 10px;
 }
 .dashboard-list .dashboard-list-right {
   flex: 1;
-  margin-left: 10px;
+  margin: 10px;
 }
 .dashboard-list .dashboard-list-title {
   font-size: 16px;
   text-align: center;
   margin-bottom: 10px;
 }
+
+@media only screen and (max-width: 800px) {
+  .dashboard-list {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+}
+

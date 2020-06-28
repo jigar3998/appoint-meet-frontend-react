@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarDashboard from "../NavBar/NavBarDashboard";
+import NavBarBusiness from "../NavBar/NavBarBusiness";
 import "./Appointments.css";
 import AppointmentTable from "../DataDisplay/AppointmentTable";
 
@@ -10,7 +10,7 @@ import { Button } from "antd";
 function Appointments() {
   return (
     <>
-      <NavBarDashboard />
+      <NavBarBusiness />
       <div className="services-container container-border">
         <div className="services-list-title">
           Your Upcoming Appointments

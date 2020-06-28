@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarDashboard from "../NavBar/NavBarDashboard";
+import NavBarBusiness from "../NavBar/NavBarBusiness";
 import "./Dashboard.css";
 
 import { Statistic, Row, Col, message } from "antd";
@@ -17,7 +17,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function Dashboard() {
   return (
     <>
-      <NavBarDashboard />
+      <NavBarBusiness />
       <div className="dashboard-container">
         <div>
           <div className="dashboard-statistic container-border">
@@ -63,7 +63,7 @@ function Dashboard() {
           <div className="dashboard-list-left">
             <div className="container-border">
               <div className="dashboard-list-title">Upcoming Appointments</div>
-              <Link to="/appointment">
+              <Link to="/business/appointment">
                 <img
                   alt="link"
                   src={ExternalLink}
@@ -87,8 +87,8 @@ function Dashboard() {
           </div>
           <div className="dashboard-list-right">
             <div className="container-border">
-              <div className="dashboard-list-title">Your Services</div>
-              <Link to="/services">
+              <div className="dashboard-list-title">Services</div>
+              <Link to="/business/services">
                 <img
                   alt="link"
                   src={ExternalLink}
@@ -110,8 +110,8 @@ function Dashboard() {
               />
             </div>
             <div className="container-border">
-              <div className="dashboard-list-title">Your Staff</div>
-              <Link to="/staff">
+              <div className="dashboard-list-title">Staff</div>
+              <Link to="/business/staff">
                 <img
                   alt="link"
                   src={ExternalLink}

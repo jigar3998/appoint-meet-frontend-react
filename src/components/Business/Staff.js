@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarDashboard from "../NavBar/NavBarDashboard";
+import NavBarBusiness from "../NavBar/NavBarBusiness";
 import "./Staff.css";
 import StaffTable from "../DataDisplay/StaffTable";
 
@@ -10,7 +10,7 @@ import { Button } from "antd";
 function Staff() {
   return (
     <>
-      <NavBarDashboard />
+      <NavBarBusiness />
       <div className="services-container container-border">
         <div className="services-list-title">
           Your Staff

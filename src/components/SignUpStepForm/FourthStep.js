@@ -37,6 +37,32 @@ function FourthStep(props) {
       return Promise.reject("Required");
     }
   };
+  const checkDuplicateEntry = (rule, value) => {
+    console.log("checkDuplicateEntry", value);
+    let formAllData = form.getFieldValue().services;
+
+    let sameServiceName = false;
+    let sameServiceNameCount = 0;
+    console.log("checkDuplicateEntry", formAllData);
+    for (let i of formAllData) {
+      console.log(i);
+      if (i) {
+        let serviceName = i.serviceName;
+        if (serviceName === value) {
+          sameServiceNameCount++;
+        }
+      
+      }
+    }
+    if (sameServiceNameCount > 1) {
+      sameServiceName = true;
+    }
+    if (!sameServiceName) {
+      return Promise.resolve();
+    } else {
+      return Promise.reject("Services with same name are not allowed");
+    }
+  };
   useEffect(() => {
     document.getElementById("add-staff-button").click();
   }, []);
@@ -99,6 +125,9 @@ function FourthStep(props) {
                             required: true,
                             whitespace: true,
                             message: "Please input Service Name",
+                          },
+                          {
+                            validator: checkDuplicateEntry,
                           },
                         ]}
                       >

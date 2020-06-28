@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Link,useHistory } from "react-router-dom";
 import { Form, Input, Button, Checkbox, message } from "antd";
 import LoginNavBar from "./NavBar/LoginNavBar";
 
-import axios from "axios";
-
-import { Url } from "../Constants/ServerUrl";
-
 import "./SignUp.css";
+
+import axios from "axios";
+import { Url } from "../Constants/ServerUrl";
+import {GlobalContext} from "../context/GlobalState";
+
 function SignUp() {
   let history = useHistory();
+  const contextData = useContext(GlobalContext)
+
 
   const [loading, setLoading] = useState(false);
   const [emailAlreadyExists, setEmailAlreadyExists] = useState(false);
@@ -18,7 +21,7 @@ function SignUp() {
     let search = window.location.search;
     let params = new URLSearchParams(search);
     let type = params.get("type");
-    if (!(type === "provider" || type === "user")) {
+    if (!(type === "business" || type === "customer")) {
       message.error("Something went wrong. Please try again");
       return;
     }
@@ -30,13 +33,13 @@ function SignUp() {
     axios
       .post(Url + "/users/signup", values)
       .then(function (response) {
-        console.log(response);
-        history.push("/dashboard");
-
+        console.log(response.data);
+        contextData.setLoginData(response.data)
+        history.push("/business/business-info");
       })
       .catch(function (error) {
         console.log(error.response);
-        if (error.response && error.response.status === 400) {
+        if (error.response && error.response.status === 400 && error.response.data==="email already exists") {
           setEmailAlreadyExists(true);
           setLoading(false);
         } else {
@@ -130,7 +133,7 @@ function SignUp() {
                     message: "Please input your password!",
                   },
                   {
-                    min: 5,
+                    min: 8,
                     message: "password not long enough",
                   },
                   {

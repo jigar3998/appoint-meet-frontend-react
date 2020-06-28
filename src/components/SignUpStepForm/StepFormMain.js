@@ -15,6 +15,7 @@ const { Step } = Steps;
 function StepFormMain() {
   const [current, setCurrent] = useState(0);
   const [width, setWidth] = useState(window.innerWidth);
+  const [businessInfo, setBusinessInfo] = useState();
   useEffect(() => {
     window.addEventListener("resize", updateWindowDimensions);
     return () => {
@@ -24,6 +25,10 @@ function StepFormMain() {
   const updateWindowDimensions = () => {
     console.log(window.innerWidth);
     setWidth(window.innerWidth);
+  };
+  const BusinessInfoNext = (data) => {
+    setBusinessInfo(data)
+    setCurrent(current + 1);
   };
   const next = () => {
     setCurrent(current + 1);
@@ -35,11 +40,11 @@ function StepFormMain() {
   const steps = [
     {
       title: "Your Business",
-      content: <FirstStep next={next} />,
+      content: <FirstStep BusinessInfoNext={BusinessInfoNext} />,
     },
     {
       title: "Timing",
-      content: <SecondStep next={prev} />,
+      content: <SecondStep next={next} businessInfo={businessInfo} />,
     },
     {
       title: "Staff",

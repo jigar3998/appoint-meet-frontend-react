@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Checkbox, TimePicker, Form, Input, Button } from "antd";
+import React, { useEffect, useState, useContext } from "react";
+import { Checkbox, TimePicker, Form, Input, Button, message } from "antd";
 import moment from "moment";
+
+import axios from "axios";
+import { Url } from "../../Constants/ServerUrl";
+import { GlobalContext } from "../../context/GlobalState";
+
 const { RangePicker } = TimePicker;
 function SecondStep(props) {
+  const contextData = useContext(GlobalContext);
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
   const [selectedDays, setSelectedDays] = useState({
     Monday: true,
     Tuesday: true,
@@ -24,17 +31,43 @@ function SecondStep(props) {
     "Sunday",
   ];
   const onFinish = (values) => {
+    let timeDetails = {};
     for (let i of daysList) {
       // console.log(values[`${i}Time`]);
-      values[`${i}Time`][0] =
-        values[`${i}Time`][0].hours() + ":" + values[`${i}Time`][0].minutes();
-      values[`${i}Time`][1] =
-        values[`${i}Time`][1].hours() + ":" + values[`${i}Time`][1].minutes();
+      timeDetails[i] = values[i];
+      timeDetails[`${i}Time`] = [
+        values[`${i}Time`][0].hours() + ":" + values[`${i}Time`][0].minutes(),
+        values[`${i}Time`][1].hours() + ":" + values[`${i}Time`][1].minutes(),
+      ];
     }
+
+    setLoading(true);
     console.log("Success:", values);
+    console.log("Success:", timeDetails);
+    console.log("Success:", props.businessInfo);
+
+    axios
+      .post(Url + "/business/signup/" + contextData.loginData.user_id, {
+        business_name: props.businessInfo.business_name,
+        industry_name: props.businessInfo.business_category,
+        business_desc: props.businessInfo.business_description,
+        business_add: props.businessInfo.business_address,
+        time: timeDetails,
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setLoading(false);
+        contextData.setLoginData({...contextData.loginData,"business_id":response.data.business_id});
+        
+        props.next();
+      })
+      .catch(function (error) {
+        console.log(error.response);
+        message.error("Something went wrong. Please try again");
+        setLoading(false);
+      });
   };
   const submitForm2 = () => {
-    props.next();
     form.submit();
   };
   const onSelectChange = (value) => {
@@ -103,7 +136,7 @@ function SecondStep(props) {
         })}
       </Form>
       <div className="signup-navigation-button">
-        <Button type="primary" onClick={submitForm2}>
+        <Button type="primary" onClick={submitForm2} loading={loading}>
           Next
         </Button>
       </div>

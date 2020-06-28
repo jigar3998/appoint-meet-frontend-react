@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarDashboard from "../NavBar/NavBarDashboard";
+import NavBarBusiness from "../NavBar/NavBarBusiness";
 import "./Services.css";
 import ServicesTable from "../DataDisplay/ServicesTable";
 
@@ -10,7 +10,7 @@ import { Button } from "antd";
 function Services() {
   return (
     <>
-      <NavBarDashboard />
+      <NavBarBusiness />
       <div className="services-container container-border">
         <div className="services-list-title">
           Your Services
