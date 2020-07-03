@@ -104,23 +104,23 @@ function AppointmentTable(props) {
       title: "Time",
       dataIndex: "time",
       // sorter: (a, b) => a.services.localeCompare(b.services),
-      width: props.tableWidth[0],
-      ellipsis: true,
+      // width: props.tableWidth[0],no
+      // ellipsis: true,no
     },
     {
       title: "Services",
       dataIndex: "services",
       sorter: (a, b) => a.services.localeCompare(b.services),
-      width: props.tableWidth[1],
-      ellipsis: true,
+      // width: props.tableWidth[1],
+      // ellipsis: true,
       ...getColumnSearchProps("services"),
     },
     {
       title: "Staff",
       dataIndex: "staff",
       sorter: (a, b) => a.staff.localeCompare(b.staff),
-      width: props.tableWidth[2],
-      ellipsis: true,
+      // width: props.tableWidth[2],
+      // ellipsis: true,
       ...getColumnSearchProps("staff"),
     },
     {
@@ -128,8 +128,8 @@ function AppointmentTable(props) {
       dataIndex: "price",
       render: (text) => <span>{text} ₹</span>,
       sorter: (a, b) => a.price - b.price,
-      width: props.tableWidth[3],
-      ellipsis: true,
+      // width: props.tableWidth[3],
+      // ellipsis: true,
       align: "center",
     },
     {
@@ -137,13 +137,13 @@ function AppointmentTable(props) {
       dataIndex: "duration",
       render: (text) => <span>{text} min</span>,
       sorter: (a, b) => a.duration - b.duration,
-      width: props.tableWidth[4],
-      ellipsis: true,
+      // width: props.tableWidth[4],
+      // ellipsis: true,
       align: "center",
     },
   ];
   return (
-    <div>
+    <div  style={{overflow:"auto"}}>
       <Table
         rowSelection={props.rowSelection}
         columns={columns}
