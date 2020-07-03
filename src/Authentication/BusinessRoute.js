@@ -24,7 +24,7 @@ const BusinessRoute = ({ component: Component, ...rest }) => {
               />
             );
           } 
-          else if(rest.path === "/business/business-info" && contextData.loginData.business_id!==undefined){
+          else if(rest.path === "/business/business-info" && contextData.loginData.business_id!==undefined && contextData.redirectToBusinessInfo){
             return (
               <Redirect
                 to={{

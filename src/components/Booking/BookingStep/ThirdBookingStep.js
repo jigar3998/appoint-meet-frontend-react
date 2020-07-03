@@ -32,6 +32,7 @@ function ThirdBookingStep(props) {
     console.log(index);
     setSelected(index);
   };
+  console.log(props)
   return (
     <div className="select-time-step">
       <div className="select-date-container">

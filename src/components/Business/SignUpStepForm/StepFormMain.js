@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { Steps, Button, message } from "antd";
-import LoginNavBar from "../NavBar/LoginNavBar";
+import LoginNavBar from "../../NavBar/LoginNavBar";
+import { useHistory } from "react-router-dom";
 
 import FirstStep from "./FirstStep";
 import SecondStep from "./SecondStep";
@@ -10,24 +11,35 @@ import FourthStep from "./FourthStep";
 
 import "./StepFormMain.css";
 
+import { GlobalContext } from "../../../context/GlobalState";
+
 const { Step } = Steps;
 
 function StepFormMain() {
-  const [current, setCurrent] = useState(0);
+  let history = useHistory();
+
+  const contextData = useContext(GlobalContext);
+
+  const [current, setCurrentT] = useState(contextData.stepFormCurrent.current);
   const [width, setWidth] = useState(window.innerWidth);
   const [businessInfo, setBusinessInfo] = useState();
+
   useEffect(() => {
     window.addEventListener("resize", updateWindowDimensions);
     return () => {
       window.removeEventListener("resize", updateWindowDimensions);
     };
   }, []);
+  let setCurrent = (num) => {
+    contextData.setStepFormCurrent(num);
+    setCurrentT(num);
+  };
   const updateWindowDimensions = () => {
     console.log(window.innerWidth);
     setWidth(window.innerWidth);
   };
   const BusinessInfoNext = (data) => {
-    setBusinessInfo(data)
+    setBusinessInfo(data);
     setCurrent(current + 1);
   };
   const next = () => {
@@ -37,6 +49,13 @@ function StepFormMain() {
   const prev = () => {
     setCurrent(current - 1);
   };
+  const onAddServiceComplete=()=>{
+    history.push("/business/dashboard");
+
+  }
+  const onAddStaffComplete=()=>{
+    setCurrent(current + 1);
+  }
   const steps = [
     {
       title: "Your Business",
@@ -48,11 +67,11 @@ function StepFormMain() {
     },
     {
       title: "Staff",
-      content: <ThirdStep next={next} />,
+      content: <ThirdStep onAddStaffComplete={onAddStaffComplete} ButtonName={"Next"} />,
     },
     {
       title: "Services",
-      content: <FourthStep />,
+      content: <FourthStep onAddServiceComplete={onAddServiceComplete} ButtonName={"Next"} />,
     },
   ];
   return (

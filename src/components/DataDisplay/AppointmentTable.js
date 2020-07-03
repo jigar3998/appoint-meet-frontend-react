@@ -104,8 +104,8 @@ function AppointmentTable(props) {
       title: "Time",
       dataIndex: "time",
       // sorter: (a, b) => a.services.localeCompare(b.services),
-      // width: props.tableWidth[0],no
-      // ellipsis: true,no
+      // width: props.tableWidth[0],
+      // ellipsis: true,
     },
     {
       title: "Services",

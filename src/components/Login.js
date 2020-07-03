@@ -13,7 +13,7 @@ import "./Login.css";
 
 import axios from "axios";
 
-import { Url } from "../Constants/ServerUrl";
+import { Url } from "../constants/ServerUrl";
 
 import { GlobalContext } from "../context/GlobalState";
 
@@ -51,12 +51,14 @@ function Login(props) {
         }
       })
       .catch(function (error) {
-        console.log(error.response.status);
+        console.log(error.response);
         if (error.response && error.response.status === 400) {
           setLoading(false);
         } else {
           message.error("Something went wrong. Please try again");
         }
+        setLoading(false);
+
         setInvalidLoginMessage(true);
       });
   };
@@ -91,7 +93,7 @@ function Login(props) {
                   },
                   {
                     required: true,
-                    message: "Please input your E-mail!",
+                    message: "Please enter your E-mail!",
                   },
                   {
                     max: 50,
@@ -109,7 +111,7 @@ function Login(props) {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your password!",
+                    message: "Please enter your password!",
                   },
                   {
                     max: 50,

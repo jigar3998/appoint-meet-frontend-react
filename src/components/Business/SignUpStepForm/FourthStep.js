@@ -1,17 +1,47 @@
-import React, { useEffect } from "react";
-import { Form, Input, Button, Col, Row, InputNumber, Select } from "antd";
+import React, { useEffect,useState,useContext } from "react";
+import { Form, Input, Button, Col, Row, InputNumber, Select,message } from "antd";
 import {
   CloseCircleOutlined,
   PlusOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+
+import { Url } from "../../../constants/ServerUrl";
+import { GlobalContext } from "../../../context/GlobalState";
+import axios from "axios";
+
+
 const { Option } = Select;
 function FourthStep(props) {
+  const contextData = useContext(GlobalContext);
+
   const [form] = Form.useForm();
+  const [isStaffLoaded, setIsStaffLoaded] = useState(false);
+  const [staffElement, setStaffElement] = useState([]);
+  const [staffKey, setStaffKey] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+
 
   const onFinish = (values) => {
     console.log("Received values of form:", values);
     // props.next();
+    setLoading(true);
+    let requestBody=values.services
+    axios
+      .post(Url + "/business/service/" + contextData.loginData.business_id, requestBody)
+      .then(function (response) {
+        console.log(response.data);
+        setLoading(false);
+        props.onAddServiceComplete()
+
+
+      })
+      .catch(function (error) {
+        console.log(error.response);
+        message.error("Something went wrong. Please try again");
+        setLoading(false);
+      });
   };
   const submitForm4 = () => {
     form.submit();
@@ -65,24 +95,53 @@ function FourthStep(props) {
   };
   useEffect(() => {
     document.getElementById("add-staff-button").click();
+    loadStaff()
   }, []);
 
-  const children = [];
-  const all = [];
+  // const staffElement = [];
+  // const staffKey = [];
 
-  for (let i = 10; i < 36; i++) {
-    let key = i.toString(36) + i + "key";
-    children.push(
-      <Option key={key}>
-        <UserOutlined /> {" " + i.toString(36) + i}
-      </Option>
-    );
-    all.push(key);
+  let loadStaff=()=>{
+    setIsStaffLoaded(true);
+
+    axios
+      // .get(Url + "/staff/" + contextData.loginData.business_id)
+      .get(Url + "/staff/" + "2")
+      .then(function (response) {
+        console.log(response.data);
+        setIsStaffLoaded(false);
+        let staffElementT=[]
+        let staffKeyT=[]
+        for (let i of response.data) {
+          staffElementT.push(
+            <Option key={i.staff_id}>
+              <UserOutlined /> {i.staff_name}
+            </Option>
+          );
+          staffKeyT.push(i.staff_id);
+        }
+        setStaffElement(staffElementT)
+        setStaffKey(staffKeyT)
+      })
+      .catch(function (error) {
+        console.log(error.response);
+        message.error("Something went wrong. Please try again");
+      });
   }
-  let x = [];
-  x[1] = {
-    "staff-list": ["a10key"],
-  };
+
+  // for (let i = 10; i < 36; i++) {
+  //   let key = i.toString(36) + i + "key";
+  //   staffElement.push(
+  //     <Option key={key}>
+  //       <UserOutlined /> {" " + i.toString(36) + i}
+  //     </Option>
+  //   );
+  //   staffKey.push(key);
+  // }
+  // let x = [];
+  // x[1] = {
+  //   "staff-list": ["a10key"],
+  // };
   // const handleChange = (value) => {
   //   console.log(value);
   //   form.setFieldsValue({
@@ -92,13 +151,14 @@ function FourthStep(props) {
   //   console.log(form.getFieldValue());
   // };
   const handleOnSelect = (value, fieldKey) => {
+    console.log("A" ,value,fieldKey,form.getFieldValue().services )
     if (value == "select-all") {
       let formAllData = form.getFieldValue().services;
-      console.log(formAllData[fieldKey], all.length);
-      if (formAllData[fieldKey]["staff-list"].length == all.length + 1) {
-        formAllData[fieldKey]["staff-list"] = [];
+      console.log(formAllData[fieldKey], staffKey.length);
+      if (formAllData[fieldKey]["staff_list"].length == staffKey.length + 1) {
+        formAllData[fieldKey]["staff_list"] = [];
       } else {
-        formAllData[fieldKey]["staff-list"] = all;
+        formAllData[fieldKey]["staff_list"] = staffKey.map(key=>key+"");
       }
       form.setFieldsValue({
         services: formAllData,
@@ -117,17 +177,21 @@ function FourthStep(props) {
                   <Row key={field.key} className="add-service-field-container">
                     <Col className="add-service-field" style={{ width: "55%" }}>
                       <Form.Item
-                        name={[field.name, "serviceName"]}
-                        fieldKey={[field.fieldKey, "serviceName"]}
+                        name={[field.name, "service_name"]}
+                        fieldKey={[field.fieldKey, "service_name"]}
                         validateTrigger={["onChange", "onBlur"]}
                         rules={[
                           {
                             required: true,
                             whitespace: true,
-                            message: "Please input Service Name",
+                            message: "Please enter Service Name",
                           },
                           {
                             validator: checkDuplicateEntry,
+                          },
+                          {
+                            max: 100,
+                            message: "The input exceeds the length limit",
                           },
                         ]}
                       >
@@ -136,8 +200,8 @@ function FourthStep(props) {
                     </Col>
                     <Col className="add-service-field">
                       <Form.Item
-                        name={[field.name, "duration"]}
-                        fieldKey={[field.fieldKey, "duration"]}
+                        name={[field.name, "time"]}
+                        fieldKey={[field.fieldKey, "time"]}
                         validateTrigger={["onChange", "onBlur"]}
                         rules={[
                           {
@@ -164,7 +228,28 @@ function FourthStep(props) {
                     </Col>
                     <Form.Item
                       style={{ width: "100%" }}
-                      name={[field.name, "staff-list"]}
+
+                        name={[field.name, "service_desc"]}
+                        fieldKey={[field.fieldKey, "service_desc"]}
+                        validateTrigger={["onChange", "onBlur"]}
+                        rules={[
+                          {
+                            required: true,
+                            whitespace: true,
+                            message: "Please enter Service description",
+                          },
+                          {
+                            max: 100,
+                            message: "The input exceeds the length limit",
+                          },
+                          
+                        ]}
+                      >
+                        <Input placeholder="Service Description" />
+                      </Form.Item>
+                    <Form.Item
+                      style={{ width: "100%" }}
+                      name={[field.name, "staff_list"]}
                       fieldKey={[field.fieldKey, "price"]}
                       validateTrigger={["onChange", "onBlur"]}
                       rules={[
@@ -175,7 +260,8 @@ function FourthStep(props) {
                       ]}
                     >
                       <Select
-                        loading
+                        loading={isStaffLoaded}
+                        disabled={isStaffLoaded}
                         maxTagTextLength={30}
                         maxTagCount={10}
                         mode="multiple"
@@ -185,7 +271,7 @@ function FourthStep(props) {
                         onSelect={(key) => handleOnSelect(key, field.key)}
                       >
                         <Option key="select-all">Select All</Option>
-                        {children}
+                        {staffElement}
                       </Select>
                     </Form.Item>
                     {fields.length > 1 ? (
@@ -220,8 +306,8 @@ function FourthStep(props) {
         </Form.List>
       </Form>
       <div className="signup-navigation-button">
-        <Button type="primary" onClick={submitForm4}>
-          Done
+        <Button type="primary" onClick={submitForm4}  loading={loading}>
+          {props.ButtonName}
         </Button>
       </div>
     </div>

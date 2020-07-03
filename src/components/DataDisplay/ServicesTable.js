@@ -1,26 +1,44 @@
-import React, { useState, useEffect } from "react";
-import { Form, Input, Button, Radio, Table, Space } from "antd";
+import React, { useState, useEffect, useContext } from "react";
+import { Form, Input, Button, Radio, Table, Space, message } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 
+import { Url } from "../../constants/ServerUrl";
+import axios from "axios";
+import { GlobalContext } from "../../context/GlobalState";
+
 function ServicesTable(props) {
-  const [loading, setLoading] = useState(false);
+  const contextData = useContext(GlobalContext);
+
+  const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [data, setData] = useState([]);
-  useEffect(() => {
-    const dataTemp = [];
-    for (let i = 0; i < 46; i++) {
-      dataTemp.push({
-        key: i + "key",
-        services: `service ${i}`,
-        price: i,
-        duration: i,
-      });
-      setData(dataTemp);
-    }
-    return () => {};
-  }, []);
+  let business_id =
+    contextData.loginData.business_id === undefined
+      ? props.business_id
+      : contextData.loginData.business_id;
 
+  useEffect(() => {
+    loadService();
+  }, []);
+  console.log("ServicesTable", props.business_id);
+
+  let loadService = () => {
+    setLoading(true);
+    axios
+      .get(Url + "/service/" + business_id)
+      // .get(Url + "/service/" + "29")
+      .then(function (response) {
+        console.log(response.data);
+        setLoading(false);
+        setData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error.response);
+        message.error("Something went wrong. Please try again");
+        setLoading(false);
+      });
+  };
   let searchInput = undefined;
   const getColumnSearchProps = () => ({
     filterDropdown: ({
@@ -67,7 +85,10 @@ function ServicesTable(props) {
       <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
     ),
     onFilter: (value, record) =>
-      record["services"].toString().toLowerCase().includes(value.toLowerCase()),
+      record["service_name"]
+        .toString()
+        .toLowerCase()
+        .includes(value.toLowerCase()),
     onFilterDropdownVisibleChange: (visible) => {
       if (visible) {
         setTimeout(() => searchInput.select());
@@ -94,33 +115,33 @@ function ServicesTable(props) {
   const columns = [
     {
       title: "Services",
-      dataIndex: "services",
-      sorter: (a, b) => a.services.localeCompare(b.services),
-      width: props.tableWidth[0],
-      ellipsis: true,
+      dataIndex: "service_name",
+      sorter: (a, b) => a.service_name.localeCompare(b.services),
+      // width: props.tableWidth[0],
+      // ellipsis: true,
       ...getColumnSearchProps(),
     },
     {
       title: "Price",
-      dataIndex: "price",
+      dataIndex: "service_price",
       render: (text) => <span>{text} ₹</span>,
-      sorter: (a, b) => a.price - b.price,
-      width: props.tableWidth[1],
-      ellipsis: true,
+      sorter: (a, b) => a.service_price - b.service_price,
+      // width: props.tableWidth[1],
+      // ellipsis: true,
       align: "center",
     },
     {
       title: "Duration",
-      dataIndex: "duration",
+      dataIndex: "service_time",
       render: (text) => <span>{text} min</span>,
-      sorter: (a, b) => a.duration - b.duration,
-      width: props.tableWidth[2],
-      ellipsis: true,
+      sorter: (a, b) => a.service_time - b.service_time,
+      // width: props.tableWidth[2],
+      // ellipsis: true,
       align: "center",
     },
   ];
   return (
-    <div>
+    <div style={{ overflow: "auto" }}>
       <Table
         rowSelection={props.rowSelection}
         columns={columns}
@@ -128,6 +149,20 @@ function ServicesTable(props) {
         bordered={props.bordered}
         pagination={props.pagination}
         scroll={props.scroll}
+        rowKey={(ele) => ele.service_id}
+        loading={loading}
+        expandable={
+          props.expandable
+            ? {
+                expandedRowRender: (record) => (
+                  <p style={{ margin: 0 }}>
+                    Service description : {record.service_description}
+                  </p>
+                ),
+                expandRowByClick: true,
+              }
+            : {}
+        }
 
         // scroll={{ x: 460 }}
       />

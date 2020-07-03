@@ -1,7 +1,7 @@
 import React from "react";
-import NavBarBusiness from "../NavBar/NavBarBusiness";
 import "./Dashboard.css";
 
+import NavBarBusiness from "../NavBar/NavBarBusiness";
 import { Statistic, Row, Col, message } from "antd";
 import { CopyOutlined } from "@ant-design/icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -61,7 +61,7 @@ function Dashboard() {
         </div>
         <div className="dashboard-list">
           <div className="dashboard-list-left">
-            <div className="container-border">
+            <div className="container-border" >
               <div className="dashboard-list-title">Upcoming Appointments</div>
               <Link to="/business/appointment">
                 <img
@@ -81,12 +81,12 @@ function Dashboard() {
               <AppointmentTable
                 bordered={true}
                 pagination={{ pageSize: 14 }}
-                tableWidth={[100, 70, 70, 50, 50]}
+                // tableWidth={[200, 150, 150, 100, 100]}
               />
             </div>
           </div>
-          <div className="dashboard-list-right">
-            <div className="container-border">
+          <div className="dashboard-list-right" >
+            <div className="container-border" >
               <div className="dashboard-list-title">Services</div>
               <Link to="/business/services">
                 <img
@@ -106,10 +106,10 @@ function Dashboard() {
               <ServicesTable
                 bordered={true}
                 pagination={{ pageSize: 5 }}
-                tableWidth={[70, 40, 40]}
+                // tableWidth={[200, 100, 100]}
               />
             </div>
-            <div className="container-border">
+            <div className="container-border" >
               <div className="dashboard-list-title">Staff</div>
               <Link to="/business/staff">
                 <img
@@ -129,7 +129,7 @@ function Dashboard() {
               <StaffTable
                 bordered={true}
                 pagination={{ pageSize: 5 }}
-                tableWidth={[100, 100]}
+                // tableWidth={[200, 200]}
               />
             </div>
           </div>

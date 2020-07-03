@@ -1,26 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
-import { Form, Input, Button, Radio, Table, Space } from "antd";
+import { Form, Input, Button, Radio, Table, Space, message } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 
+import { Url } from "../../constants/ServerUrl";
+import axios from "axios";
+import { GlobalContext } from "../../context/GlobalState";
+
 function ProviderTable(props) {
-  const [loading, setLoading] = useState(false);
+  const contextData = useContext(GlobalContext);
+
+  const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [data, setData] = useState([]);
+  let requesurl;
+  if (contextData.loginData.business_id !== undefined) {
+    //find staff by id 
+    requesurl ="/staff/" + contextData.loginData.business_id;
+  } else if (props.business_id !== undefined) {
+    //find staff by id
+    requesurl ="/staff/" + props.business_id;    
+  } else if (props.service_id !== undefined) {
+    //find staff by service name
+    requesurl ="/staff&service/" + props.service_id;
+  }
   useEffect(() => {
-    const dataTemp = [];
-    for (let i = 0; i < 46; i++) {
-      dataTemp.push({
-        key: i + "key",
-        staff: `Staff ${i}`,
-        email: i + "@gmail.com",
-        duration: i,
-      });
-      setData(dataTemp);
-    }
-    return () => {};
+    loadStaff();            
   }, []);
+  let loadStaff = () => {
+    setLoading(true);
+
+    axios
+      .get(Url + requesurl)
+      // .get(Url + "/staff/" + "29")
+      .then(function (response) {
+        console.log(response.data);
+        setLoading(false);
+        setData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error.response);
+        message.error("Something went wrong. Please try again");
+        setLoading(false);
+      });
+  };
+
   let searchInput = undefined;
   const getColumnSearchProps = () => ({
     filterDropdown: ({
@@ -67,7 +92,7 @@ function ProviderTable(props) {
       <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
     ),
     onFilter: (value, record) =>
-      record["staff"].toString().toLowerCase().includes(value.toLowerCase()),
+      record["staff_name"].toString().toLowerCase().includes(value.toLowerCase()),
     onFilterDropdownVisibleChange: (visible) => {
       if (visible) {
         setTimeout(() => searchInput.select());
@@ -95,21 +120,21 @@ function ProviderTable(props) {
   const columns = [
     {
       title: "Staff",
-      dataIndex: "staff",
-      sorter: (a, b) => a.staff.localeCompare(b.staff),
-      width: props.tableWidth[0],
-      ellipsis: true,
+      dataIndex: "staff_name",
+      sorter: (a, b) => a.staff_name.localeCompare(b.staff),
+      // width: props.tableWidth[0],
+      // ellipsis: true,
       ...getColumnSearchProps(),
     },
     {
       title: "Email",
-      dataIndex: "email",
-      width: props.tableWidth[0],
-      ellipsis: true,
+      dataIndex: "staff_email",
+      // width: props.tableWidth[0],
+      // ellipsis: true,
     },
   ];
   return (
-    <div>
+    <div  style={{overflow:"auto"}}>
       <Table
         rowSelection={props.rowSelection}
         columns={columns}
@@ -117,8 +142,8 @@ function ProviderTable(props) {
         bordered={props.bordered}
         pagination={props.pagination}
         scroll={props.scroll}
-
-        // scroll={{ x: 460 }}
+        rowKey={(ele) => ele.staff_id}
+        loading={loading}
       />
     </div>
   );

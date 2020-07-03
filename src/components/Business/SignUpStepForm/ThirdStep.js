@@ -1,15 +1,43 @@
-import React, { useEffect } from "react";
-import { Form, Input, Button, Col, Row } from "antd";
+import React, { useEffect,useContext,useState } from "react";
+import { Form, Input, Button, Col, Row,message } from "antd";
 import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
+import { Url } from "../../../constants/ServerUrl";
+import { GlobalContext } from "../../../context/GlobalState";
+
+import axios from "axios";
+
+
 function ThirdStep(props) {
+  const contextData = useContext(GlobalContext);
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
+
+
 
   const onFinish = (values) => {
     console.log("Received values of form:", values);
+    let requestBody=values.staff
+    console.log(requestBody)
+    
+    setLoading(true);
+
+    axios
+      .post(Url + "/business/staff/" + contextData.loginData.business_id, requestBody)
+      // .post(Url + "/business/staff/" + "29", requestBody)
+      .then(function (response) {
+        console.log(response.data);
+        setLoading(false);
+        props.onAddStaffComplete();
+      })
+      .catch(function (error) {
+        console.log(error.response);
+        message.error("Something went wrong. Please try again");
+        setLoading(false);
+      });
   };
+  
   const submitForm3 = () => {
-    props.next();
     form.submit();
   };
   useEffect(() => {
@@ -27,14 +55,21 @@ function ThirdStep(props) {
                   <Row key={field.key} className="add-staff-field-container">
                     <Col className="add-staff-field">
                       <Form.Item
-                        name={[field.name, "lastName"]}
-                        fieldKey={[field.fieldKey, "lastName"]}
+                        name={[field.name, "staff_name"]}
+                        fieldKey={[field.fieldKey, "staff_name"]}
                         validateTrigger={["onChange", "onBlur"]}
                         rules={[
                           {
                             required: true,
-                            whitespace: true,
-                            message: "Please input name",
+                            message: "Please enter staff name!",
+                          },
+                          {
+                            max: 50,
+                            message: "The input exceeds the length limit",
+                          },
+                          {
+                            pattern: new RegExp(/^[a-zA-Z ]+$/),
+                            message: "The enter valid name",
                           },
                         ]}
                       >
@@ -43,14 +78,20 @@ function ThirdStep(props) {
                     </Col>
                     <Col className="add-staff-field">
                       <Form.Item
-                        name={[field.name, "firstName"]}
-                        fieldKey={[field.fieldKey, "firstName"]}
+                        name={[field.name, "email"]}
+                        fieldKey={[field.fieldKey, "email"]}
                         validateTrigger={["onChange", "onBlur"]}
                         rules={[
                           {
+                            type: "email",
+                            message: "The input is not valid E-mail!",
+                          },
+                          {
                             required: true,
-                            whitespace: true,
-                            message: "Please input email",
+                            message: "Please enter staff E-mail!",
+                          },   {
+                            max: 50,
+                            message: "The input exceeds the length limit",
                           },
                         ]}
                       >
@@ -89,8 +130,8 @@ function ThirdStep(props) {
         </Form.List>
       </Form>
       <div className="signup-navigation-button">
-        <Button type="primary" onClick={submitForm3}>
-          Next
+        <Button type="primary" onClick={submitForm3} loading={loading}> 
+          {props.ButtonName}
         </Button>
       </div>
     </div>

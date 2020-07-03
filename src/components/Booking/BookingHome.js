@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,24 +7,67 @@ import {
   useParams,
 } from "react-router-dom";
 
+import {
+  Form,
+  Input,
+  Button,
+  Radio,
+  Table,
+  Space,
+  message,
+  Skeleton,
+} from "antd";
+
 import BookingStepMain from "./BookingStep/BookingStepMain";
 
 import "./BookingHome.css";
+import { Url } from "../../constants/ServerUrl";
+import axios from "axios";
 
 function BookingHome() {
-  let { id } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [businessInfo, setBusinessInfo] = useState(undefined  );
+  let { id: business_id } = useParams();
+
+  useEffect(() => {
+    loadbusinessInfo();
+  }, []);
+
+  let loadbusinessInfo = () => {
+    setLoading(true);
+    axios
+      .get(Url + "/business/" + business_id)
+      .then(function (response) {
+        console.log(response.data);
+        setLoading(false);
+        setBusinessInfo(response.data[0]);
+      })
+      .catch(function (error) {
+        console.log(error.response);
+        message.error("Something went wrong. Please try again");
+        setLoading(false);
+      });
+  };
+
   return (
     <>
-      <h3>ID: {id}</h3>
+      <h3>ID: {business_id}</h3>
       <div className="business-home-container">
         <div className="business-left-container">
-          <h1>Service Name</h1>
-          <p>Address</p>
-          <p>Email</p>
-          <p>Open Hours</p>
+          {loading ? (
+            <Skeleton active loading={loading} />
+          ) : (
+            businessInfo && 
+            <>
+              <h1>{businessInfo.business_name}</h1>
+              <p>{businessInfo.business_description}</p>
+              <p>{businessInfo.business_address}</p>
+              <p>Open Hours</p>
+            </>
+          )}
         </div>
         <div className="business-right-container">
-          <BookingStepMain />
+          <BookingStepMain business_id={business_id} />
         </div>
       </div>
     </>

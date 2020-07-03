@@ -11,9 +11,10 @@ import "./BookingStepMain.css";
 
 const { Step } = Steps;
 
-function BookingStepMain() {
+function BookingStepMain(props) {
   const [current, setCurrent] = useState(0);
   const [width, setWidth] = useState(window.innerWidth);
+  const [bookingInfo,serBookingInfo]= useState({});
   useEffect(() => {
     window.addEventListener("resize", updateWindowDimensions);
     return () => {
@@ -31,22 +32,29 @@ function BookingStepMain() {
   const prev = () => {
     setCurrent(current - 1);
   };
+  const handleServiceNext=(service)=>{
+    serBookingInfo({"service":service})
+    setCurrent(current + 1);}
+  const handleStaffNext=(staff)=>{
+    serBookingInfo({...bookingInfo,"staff":staff})
+    setCurrent(current + 1);
+  }
   const steps = [
     {
       title: "Service",
-      content: <FirstBookingStep next={next} />,
+      content: <FirstBookingStep handleServiceNext={handleServiceNext} business_id={props.business_id}/>,
     },
     {
       title: "Staff",
-      content: <SecondBookingStep next={next} prev={prev} />,
+      content: <SecondBookingStep handleStaffNext={handleStaffNext} prev={prev}  service_id={bookingInfo.service}/>,
     },
     {
       title: "Time",
-      content: <ThirdBookingStep next={next} prev={prev} />,
+      content: <ThirdBookingStep next={next} prev={prev} service_id={bookingInfo.service} staff_id={bookingInfo.staff} />,
     },
     {
       title: "Confirm",
-      content: <FourthBookingStep prev={prev} />,
+      content: <FourthBookingStep prev={prev}  business_id={props.business_id}/>,
     },
   ];
   return (

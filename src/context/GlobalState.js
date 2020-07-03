@@ -1,10 +1,15 @@
-import React, { createContext, Component, useState, useEffect } from "react";
+import React, { createContext, Component, useState, useEffect,useRef } from "react";
 
 export const GlobalContext = createContext();
 
 function GlobalState(props) {
   const [loginData, setLoginData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
+  const [redirectToBusinessInfo, setRedirectToBusinessInfo] = useState(true);
+  const stepFormCurrent = useRef(0)
+  let setStepFormCurrent=(num)=>{
+    stepFormCurrent.current=num
+  }
 
   let setLoginDataL = (data) => {
     setLoginData(data);
@@ -29,7 +34,12 @@ function GlobalState(props) {
         value={{
           loginData,
           isLoaded,
+          redirectToBusinessInfo,
+          stepFormCurrent,
           setLoginData: setLoginDataL,
+          setIsLoaded,
+          setRedirectToBusinessInfo,
+          setStepFormCurrent,
         }}
       >
         {props.children}

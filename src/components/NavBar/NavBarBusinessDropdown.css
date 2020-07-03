@@ -23,6 +23,7 @@
 }
 .dropdown .dropdown-item {
   padding: 10px;
+  color: rgb(68, 68, 68);
 }
 .dropdown hr {
   border-width: 0px;

@@ -3,8 +3,8 @@ import { Checkbox, TimePicker, Form, Input, Button, message } from "antd";
 import moment from "moment";
 
 import axios from "axios";
-import { Url } from "../../Constants/ServerUrl";
-import { GlobalContext } from "../../context/GlobalState";
+import { Url } from "../../../constants/ServerUrl";
+import { GlobalContext } from "../../../context/GlobalState";
 
 const { RangePicker } = TimePicker;
 function SecondStep(props) {
@@ -57,15 +57,23 @@ function SecondStep(props) {
       .then(function (response) {
         console.log(response.data);
         setLoading(false);
-        contextData.setLoginData({...contextData.loginData,"business_id":response.data.business_id});
-        
-        props.next();
+        setData(response)
       })
       .catch(function (error) {
         console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
       });
+  };
+  const setData = async (response) => {
+    props.next();
+    await contextData.setRedirectToBusinessInfo(false);
+    
+    await contextData.setLoginData({
+      ...contextData.loginData,
+      business_id: response.data.business_id,
+    });
+
   };
   const submitForm2 = () => {
     form.submit();

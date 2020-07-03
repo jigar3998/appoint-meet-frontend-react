@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 
 import { Form, Input, Button, Radio, Table, Space } from "antd";
 
-import ProviderTable from "../../DataDisplay/StaffTable";
+import StaffTable from "../../DataDisplay/StaffTable";
 function SecondBookingStep(props) {
   const [width, setWidth] = useState(window.innerWidth);
+  const [selectedRowKey, setSelectedRowKey] = useState(undefined);
+  const [disableButton, setDisableButton] = useState(true);
 
-  const onSelectChange = (selectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
+
+  const onSelectChange = (key) => {
+    // console.log("selectedRowKeys changed: ", selectedRowKeys);
+    setSelectedRowKey(key[0]);
+    setDisableButton(false)
   };
   const updateWindowDimensions = () => {
     console.log(window.innerWidth);
@@ -19,12 +24,15 @@ function SecondBookingStep(props) {
       window.removeEventListener("resize", updateWindowDimensions);
     };
   }, []);
-
+  // console.log("props",props);
+  const handleNext = () => {
+    props.handleStaffNext(selectedRowKey);
+  };
   return (
     <div className="service-container">
       <div className="service-title">Select Staff</div>
       <div className="service-div-container">
-        <ProviderTable
+        <StaffTable
           rowSelection={{
             type: "radio",
             onChange: onSelectChange,
@@ -33,11 +41,12 @@ function SecondBookingStep(props) {
           pagination={{ pageSize: 5 }}
           scroll={width < 560 ? { x: 460 } : {}}
           tableWidth={[200, 200]}
+          service_id={props.service_id}
         />
       </div>
       <div className="signup-navigation-button">
         <Button onClick={() => props.prev()}>Previous</Button>
-        <Button type="primary" onClick={() => props.next()}>
+        <Button type="primary" onClick={() => props.next()}  onClick={handleNext} disabled={disableButton}>
           Next
         </Button>
       </div>

@@ -1,18 +1,37 @@
-import React,{useContext} from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useContext } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+} from "react-router-dom";
 
 import "./NavBarBusinessDropdown.css";
 
-import {GlobalContext} from "../../context/GlobalState";
+import { GlobalContext } from "../../context/GlobalState";
+import { Form, Input, Button, Col, Row,message } from "antd";
 
 
 function NavBarBusinessDropdown() {
-  const contextData = useContext(GlobalContext)
-  const name = contextData.loginData.first_name
+  let history = useHistory();
+
+  const contextData = useContext(GlobalContext);
+  const name = contextData.loginData.first_name;
+  let handleLogout = () => {
+    // to reset global state
+    contextData.setLoginData({})
+    // contextData.setIsLoaded(false)
+    contextData.setRedirectToBusinessInfo(true)
+    localStorage.clear();
+    history.push("/");
+    message.success("You have been successfully logged out.");
+
+  };
   return (
     <>
       <div className="nav-right-button">
-      {name.substring(0,15) + (name.length>15?"...":"")}{" "}
+        {name.substring(0, 15) + (name.length > 15 ? "..." : "")}{" "}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -25,12 +44,32 @@ function NavBarBusinessDropdown() {
       </div>
 
       <div className="dropdown">
-        <div className="dropdown-item">Dashboard</div>
-        <div className="dropdown-item">My Appointment</div>
-        <div className="dropdown-item">My Services</div>
-        <div className="dropdown-item">My Staff</div>
-        <div className="dropdown-item">Account</div>
-        <div className="dropdown-item">Logout</div>
+        <Link to="/business/dashboard">
+          {" "}
+          <div className="dropdown-item">Dashboard</div>
+        </Link>
+        <Link to="/business/appointment">
+          {" "}
+          <div className="dropdown-item">My Appointment</div>
+        </Link>
+        <Link to="/business/services">
+          {" "}
+          <div className="dropdown-item">My Services</div>
+        </Link>
+        <Link to="/business/staff">
+          {" "}
+          <div className="dropdown-item">My Staff</div>
+        </Link>
+        <Link to="#">
+          {" "}
+          <div className="dropdown-item">Account</div>
+        </Link>
+        <Link to="#">
+          {" "}
+          <div className="dropdown-item" onClick={handleLogout}>
+            Logout
+          </div>
+        </Link>
       </div>
     </>
   );

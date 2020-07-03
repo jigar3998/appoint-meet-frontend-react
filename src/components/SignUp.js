@@ -6,7 +6,7 @@ import LoginNavBar from "./NavBar/LoginNavBar";
 import "./SignUp.css";
 
 import axios from "axios";
-import { Url } from "../Constants/ServerUrl";
+import { Url } from "../constants/ServerUrl";
 import {GlobalContext} from "../context/GlobalState";
 
 function SignUp() {
@@ -39,12 +39,12 @@ function SignUp() {
       })
       .catch(function (error) {
         console.log(error.response);
-        if (error.response && error.response.status === 400 && error.response.data==="email already exists") {
+        if (error.response && error.response.status === 400 && error.response.data.error_message==="email already exists") {
           setEmailAlreadyExists(true);
-          setLoading(false);
         } else {
           message.error("Something went wrong. Please try again");
         }
+        setLoading(false);
       });
   };
 
@@ -74,11 +74,15 @@ function SignUp() {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your first name!",
+                    message: "Please enter your first name!",
                   },
                   {
                     max: 50,
                     message: "The input exceeds the length limit",
+                  },
+                  {
+                    pattern: new RegExp(/^[a-zA-Z]+$/),
+                    message: "The enter valid name",
                   },
                 ]}
               >
@@ -91,11 +95,15 @@ function SignUp() {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your last name!",
+                    message: "Please enter your last name!",
                   },
                   {
                     max: 50,
                     message: "The input exceeds the length limit",
+                  },
+                  {
+                    pattern: new RegExp(/^[a-zA-Z]+$/),
+                    message: "The enter valid name",
                   },
                 ]}
               >
@@ -112,7 +120,7 @@ function SignUp() {
                   },
                   {
                     required: true,
-                    message: "Please input your E-mail!",
+                    message: "Please enter your E-mail!",
                   },
                   {
                     max: 50,
@@ -130,7 +138,7 @@ function SignUp() {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your password!",
+                    message: "Please enter your password!",
                   },
                   {
                     min: 8,
