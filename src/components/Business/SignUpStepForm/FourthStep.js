@@ -6,9 +6,9 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 
+import axios from "axios";
 import { Url } from "../../../constants/ServerUrl";
 import { GlobalContext } from "../../../context/GlobalState";
-import axios from "axios";
 
 
 const { Option } = Select;
@@ -96,6 +96,7 @@ function FourthStep(props) {
   useEffect(() => {
     document.getElementById("add-staff-button").click();
     loadStaff()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // const staffElement = [];
@@ -105,8 +106,8 @@ function FourthStep(props) {
     setIsStaffLoaded(true);
 
     axios
-      // .get(Url + "/staff/" + contextData.loginData.business_id)
-      .get(Url + "/staff/" + "2")
+      .get(Url + "/staff/" + contextData.loginData.business_id)
+      // .get(Url + "/staff/" + "2")
       .then(function (response) {
         console.log(response.data);
         setIsStaffLoaded(false);
@@ -128,33 +129,13 @@ function FourthStep(props) {
         message.error("Something went wrong. Please try again");
       });
   }
-
-  // for (let i = 10; i < 36; i++) {
-  //   let key = i.toString(36) + i + "key";
-  //   staffElement.push(
-  //     <Option key={key}>
-  //       <UserOutlined /> {" " + i.toString(36) + i}
-  //     </Option>
-  //   );
-  //   staffKey.push(key);
-  // }
-  // let x = [];
-  // x[1] = {
-  //   "staff-list": ["a10key"],
-  // };
-  // const handleChange = (value) => {
-  //   console.log(value);
-  //   form.setFieldsValue({
-  //     services: x,
-  //   });
-  //   console.log(value);
-  //   console.log(form.getFieldValue());
-  // };
   const handleOnSelect = (value, fieldKey) => {
     console.log("A" ,value,fieldKey,form.getFieldValue().services )
+      // eslint-disable-next-line eqeqeq
     if (value == "select-all") {
       let formAllData = form.getFieldValue().services;
       console.log(formAllData[fieldKey], staffKey.length);
+      // eslint-disable-next-line eqeqeq
       if (formAllData[fieldKey]["staff_list"].length == staffKey.length + 1) {
         formAllData[fieldKey]["staff_list"] = [];
       } else {

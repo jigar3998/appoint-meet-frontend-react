@@ -12,7 +12,7 @@ const BusinessRoute = ({ component: Component, ...rest }) => {
       render={(props) => {
         if (
           contextData.loginData && contextData.loginData.user_id!==undefined &&
-          contextData.loginData.access == "business"
+          contextData.loginData.access === "business"
         ) {
           if (rest.path !== "/business/business-info" && contextData.loginData.business_id===undefined
           ) {

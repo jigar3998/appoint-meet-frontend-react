@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Calendar, Alert, Button } from "antd";
+import { Calendar,  Button } from "antd";
 import moment from "moment";
 
 function ThirdBookingStep(props) {
   const [value, setValue] = useState(moment("2017-01-25"));
+  // eslint-disable-next-line no-unused-vars
   const [selectedValue, setSelectedValue] = useState(moment("2017-01-25"));
   const [selected, setSelected] = useState(null);
   const timeSolts = [
@@ -56,7 +57,7 @@ function ThirdBookingStep(props) {
           {timeSolts.map((value, index) => (
             <div
               onClick={() => select(index)}
-              className={selected == index ? "service-selected" : ""}
+              className={selected === index ? "service-selected" : ""}
             >
               {value}
             </div>

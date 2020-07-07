@@ -1,6 +1,6 @@
 import React, { useState,useContext } from "react";
-import { BrowserRouter as Router, Switch, Route, Link,useHistory } from "react-router-dom";
-import { Form, Input, Button, Checkbox, message } from "antd";
+import {  useHistory } from "react-router-dom";
+import { Form, Input, Button,  message } from "antd";
 import LoginNavBar from "./NavBar/LoginNavBar";
 
 import "./SignUp.css";

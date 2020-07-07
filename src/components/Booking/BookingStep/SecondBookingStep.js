@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Form, Input, Button, Radio, Table, Space } from "antd";
+import {  Button } from "antd";
 
 import StaffTable from "../../DataDisplay/StaffTable";
 function SecondBookingStep(props) {
@@ -46,7 +46,7 @@ function SecondBookingStep(props) {
       </div>
       <div className="signup-navigation-button">
         <Button onClick={() => props.prev()}>Previous</Button>
-        <Button type="primary" onClick={() => props.next()}  onClick={handleNext} disabled={disableButton}>
+        <Button type="primary" onClick={handleNext} disabled={disableButton}>
           Next
         </Button>
       </div>

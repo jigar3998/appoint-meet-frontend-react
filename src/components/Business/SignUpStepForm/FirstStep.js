@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Form, Input, Button, Radio } from "antd";
+import React from "react";
+import { Form, Input, Button } from "antd";
 function FirstStep(props) {
   const [form] = Form.useForm();
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import { Steps, Button, message } from "antd";
+import { Steps } from "antd";
 import LoginNavBar from "../../NavBar/LoginNavBar";
 import { useHistory } from "react-router-dom";
 
@@ -46,9 +46,9 @@ function StepFormMain() {
     setCurrent(current + 1);
   };
 
-  const prev = () => {
-    setCurrent(current - 1);
-  };
+  // const prev = () => {
+  //   setCurrent(current - 1);
+  // };
   const onAddServiceComplete=()=>{
     history.push("/business/dashboard");
 

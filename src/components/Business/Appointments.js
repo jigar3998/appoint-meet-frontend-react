@@ -3,9 +3,6 @@ import NavBarBusiness from "../NavBar/NavBarBusiness";
 import "./Appointments.css";
 import AppointmentTable from "../DataDisplay/AppointmentTable";
 
-import { PlusOutlined } from "@ant-design/icons";
-
-import { Button } from "antd";
 
 function Appointments() {
   return (

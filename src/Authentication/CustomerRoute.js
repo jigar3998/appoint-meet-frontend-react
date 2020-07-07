@@ -15,7 +15,7 @@ const CustomerRoute = ({
     <Route
       {...rest}
       render={props => {
-        if (contextData.loginData && contextData.loginData.user_id!==undefined && contextData.loginData.access=="customer") {
+        if (contextData.loginData && contextData.loginData.user_id!==undefined && contextData.loginData.access==="customer") {
           return <Component {...props} />;
         } else {
           return (

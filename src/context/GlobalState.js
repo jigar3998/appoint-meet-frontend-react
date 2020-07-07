@@ -1,4 +1,4 @@
-import React, { createContext, Component, useState, useEffect,useRef } from "react";
+import React, { createContext, useState, useEffect,useRef } from "react";
 
 export const GlobalContext = createContext();
 
@@ -26,6 +26,7 @@ function GlobalState(props) {
   };
   useEffect(() => {
     loadData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

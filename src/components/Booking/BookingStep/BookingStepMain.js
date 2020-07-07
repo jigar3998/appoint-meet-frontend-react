@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Steps, Button, message } from "antd";
+import { Steps } from "antd";
 
 import FirstBookingStep from "./FirstBookingStep";
 import SecondBookingStep from "./SecondBookingStep";

@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
   useParams,
 } from "react-router-dom";
 
 import {
-  Form,
-  Input,
-  Button,
-  Radio,
-  Table,
-  Space,
   message,
   Skeleton,
 } from "antd";
@@ -31,6 +21,7 @@ function BookingHome() {
 
   useEffect(() => {
     loadbusinessInfo();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let loadbusinessInfo = () => {

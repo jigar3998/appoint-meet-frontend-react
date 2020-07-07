@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, Button, Radio, Table, Space } from "antd";
+import {  Input, Button,  Table, Space } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 
 function AppointmentTable(props) {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [data, setData] = useState([]);
