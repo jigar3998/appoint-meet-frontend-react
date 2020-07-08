@@ -39,6 +39,10 @@ function BookingStepMain(props) {
     serBookingInfo({...bookingInfo,"staff":staff})
     setCurrent(current + 1);
   }
+  const handleSlotNext=(slot)=>{
+    serBookingInfo({...bookingInfo,"slot":slot})
+    setCurrent(current + 1);
+  }
   const steps = [
     {
       title: "Service",
@@ -50,11 +54,11 @@ function BookingStepMain(props) {
     },
     {
       title: "Time",
-      content: <ThirdBookingStep next={next} prev={prev} service_id={bookingInfo.service} staff_id={bookingInfo.staff} />,
+      content: <ThirdBookingStep handleSlotNext={handleSlotNext} prev={prev} service_id={bookingInfo.service} staff_id={bookingInfo.staff} />,
     },
     {
       title: "Confirm",
-      content: <FourthBookingStep prev={prev}  business_id={props.business_id}/>,
+      content: <FourthBookingStep prev={prev} bookingInfo={bookingInfo}/>,
     },
   ];
   return (

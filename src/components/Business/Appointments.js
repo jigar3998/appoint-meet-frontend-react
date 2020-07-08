@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarBusiness from "../NavBar/NavBarBusiness";
+import NavBarApplication from "../NavBar/NavBarApplication";
 import "./Appointments.css";
 import AppointmentTable from "../DataDisplay/AppointmentTable";
 
@@ -7,7 +7,7 @@ import AppointmentTable from "../DataDisplay/AppointmentTable";
 function Appointments() {
   return (
     <>
-      <NavBarBusiness />
+      <NavBarApplication dropdowntype={"business"}/>
       <div className="services-container container-border">
         <div className="services-list-title">
           Your Upcoming Appointments

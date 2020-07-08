@@ -16,7 +16,7 @@ import axios from "axios";
 
 function BookingHome() {
   const [loading, setLoading] = useState(false);
-  const [businessInfo, setBusinessInfo] = useState(undefined  );
+  const [businessInfo, setBusinessInfo] = useState(undefined);
   let { id: business_id } = useParams();
 
   useEffect(() => {

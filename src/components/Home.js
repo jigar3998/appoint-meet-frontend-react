@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./Home.css";
 
-import Navbar from "./NavBar/NavBar";
+import Navbar from "./NavBar/NavBarHome";
 
 import homeIllustration1 from "../asserts/home-illustration-5.svg";
 

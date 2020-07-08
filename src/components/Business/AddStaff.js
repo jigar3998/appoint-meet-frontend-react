@@ -1,6 +1,6 @@
 import React from "react";
 import ThirdStep from "./SignUpStepForm/ThirdStep";
-import NavBarBusiness from "../NavBar/NavBarBusiness";
+import NavBarApplication from "../NavBar/NavBarApplication";
 import { useHistory } from "react-router-dom";
 
 
@@ -12,7 +12,8 @@ function AddStaff() {
   };
   return (
     <div>
-      <NavBarBusiness />
+        <NavBarApplication dropdowntype={"business"}/>
+
       <div className="signup-step-form-container">
         <h1 style={{ marginTop: "-30px", textAlign: "center" }}>Add Staff</h1>
         <hr/>

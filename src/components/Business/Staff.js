@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarBusiness from "../NavBar/NavBarBusiness";
+import NavBarApplication from "../NavBar/NavBarApplication";
 import "./Staff.css";
 import StaffTable from "../DataDisplay/StaffTable";
 
@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 function Staff() {
   return (
     <>
-      <NavBarBusiness />
+      <NavBarApplication dropdowntype={"business"}/>
       <div className="services-container container-border" style={{overflow:"auto"}}>
         <div className="services-list-title">
           Your Staff

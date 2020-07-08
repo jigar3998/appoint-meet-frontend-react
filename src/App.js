@@ -9,12 +9,13 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import ProviderForm from "./components/Business/SignUpStepForm/StepFormMain";
 import BookingHome from "./components/Booking/BookingHome";
-import Dashboard from "./components/Business/Dashboard";
+import BusinessDashboard from "./components/Business/Dashboard";
 import Appointments from "./components/Business/Appointments";
 import Services from "./components/Business/Services";
 import Staff from "./components/Business/Staff";
 import AddService from "./components/Business/AddService";
 import AddStaff from "./components/Business/AddStaff";
+import CustomerDashboard from "./components/Customer/Dashboard";
 import BusinessRoute from "./authentication/BusinessRoute";
 import CustomerRoute from "./authentication/CustomerRoute";
 import DefaultRoute from "./authentication/DefaultRoute";
@@ -30,7 +31,7 @@ function App() {
     <Router>
       {contextData.isLoaded ? (
         <Switch>
-          <DefaultRoute exact path="/" component={() => <Home />} />
+          <Route exact path="/" component={() => <Home />} />
           <DefaultRoute exact path="/login" component={() => <Login />} />
           <DefaultRoute exact path="/signup" component={() => <SignUp />} />
           <BusinessRoute
@@ -41,7 +42,7 @@ function App() {
           <BusinessRoute
             exact
             path="/business/dashboard"
-            component={() => <Dashboard />}
+            component={() => <BusinessDashboard />}
           />
           <BusinessRoute
             exact
@@ -69,6 +70,11 @@ function App() {
             component={() => <AddStaff />}
           />
 
+          <CustomerRoute
+            exact
+            path="/customer/dashboard"
+            component={() => <CustomerDashboard />}
+          />
           <CustomerRoute
             exact
             path="/booking/:id"

@@ -1,39 +1,55 @@
-import React, { useState } from "react";
-import { Calendar,  Button } from "antd";
-import moment from "moment";
+import React, { useState, useContext, useEffect } from "react";
+import { Calendar, Button, message, Spin } from "antd";
+
+import { LoadingOutlined } from "@ant-design/icons";
+
+import { Url } from "../../../constants/ServerUrl";
+import axios from "axios";
 
 function ThirdBookingStep(props) {
-  const [value, setValue] = useState(moment("2017-01-25"));
-  // eslint-disable-next-line no-unused-vars
-  const [selectedValue, setSelectedValue] = useState(moment("2017-01-25"));
-  const [selected, setSelected] = useState(null);
-  const timeSolts = [
-    "9:00 AM",
-    "9:00 AM",
-    "9:00 AM",
-    "9:00 AM",
-    "9:00 AM",
-    "9:00 AM",
-    "9:00 AM",
-    "9:00 AM",
-    "9:00 AM",
-    "9:00 AM",
-    "9:00 AM",
-    "9:00 AM",
-  ];
-  const onSelect = (value) => {
-    setValue(value);
-    setSelectedValue(value);
+  const [loading, setLoading] = useState(false);
+  const [selectedTime, setSelectedTime] = useState(-1);
+  const [timeSolts, setTimeSolts] = useState([]);
+
+  useEffect(() => {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0");
+    let yyyy = today.getFullYear();
+
+    today = yyyy + "-" + mm + "-" + dd;
+
+    loadSlots(today);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  let loadSlots = (date) => {
+    setLoading(true);
+    axios
+      .post(Url + "/booking_status/" + props.service_id, {
+        staff_id: props.staff_id,
+        booking_date: date,
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setLoading(false);
+        setTimeSolts(response.data);
+      })
+      .catch(function (error) {
+        console.log(error.response);
+        message.error("Something went wrong. Please try again");
+        setLoading(false);
+      });
   };
 
-  const onPanelChange = (value) => {
-    setValue(value);
+  const onSelectDate = (value) => {
+    // setSelectedDate(value);
+    loadSlots(value.format("YYYY-MM-DD"));
   };
-  const select = (index) => {
+  const selectTime = (index) => {
     console.log(index);
-    setSelected(index);
+    setSelectedTime(index);
   };
-  console.log(props)
   return (
     <div className="select-time-step">
       <div className="select-date-container">
@@ -45,28 +61,46 @@ function ThirdBookingStep(props) {
         <div className="select-date-container-title">Select Date</div>
         <Calendar
           fullscreen={false}
-          value={value}
-          onSelect={onSelect}
-          onPanelChange={onPanelChange}
+          // value={value}
+          onSelect={onSelectDate}
         />
       </div>
       <div className="time-slots-container">
         <div className="select-date-container-title">Select Time Slots</div>
         <div className="time-slots">
           {/* <div>1 9:00 AM</div> */}
-          {timeSolts.map((value, index) => (
-            <div
-              onClick={() => select(index)}
-              className={selected === index ? "service-selected" : ""}
-            >
-              {value}
-            </div>
-          ))}
+          {loading ? (
+            <LoadingOutlined style={{ fontSize: 24 }} spin />
+          ) : (
+            timeSolts.map((value) => {
+              let classname = "";
+              if (selectedTime.slot_id === value.slot_id) {
+                classname = value.booked
+                  ? "service-selected booked"
+                  : "service-selected not-booked";
+              } else {
+                classname = value.booked ? "booked" : "not-booked";
+              }
+              return (
+                <div
+                  key={value.slot_id}
+                  onClick={() => !value.booked && selectTime(value)}
+                  className={classname}
+                >
+                  {value.start_time_slot}
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
       <div className="signup-navigation-button">
         <Button onClick={() => props.prev()}>Previous</Button>
-        <Button type="primary" onClick={() => props.next()}>
+        <Button
+          type="primary"
+          onClick={() => props.handleSlotNext(selectedTime)}
+          disabled={selectedTime === -1}
+        >
           Next
         </Button>
       </div>

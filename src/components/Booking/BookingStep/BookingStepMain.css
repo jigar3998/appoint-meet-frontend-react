@@ -38,16 +38,23 @@
 
   /* margin-top: 30px; */
 }
-.service-container .service-div:hover,
-.time-slots div:hover {
-  background-color: #3171ca;
-  color: white;
-  cursor: pointer;
-}
+
 .service-selected {
   background-color: #3171ca;
   color: white;
   cursor: pointer;
+}
+.not-booked:hover {
+  background-color: #3171ca;
+  color: white;
+  cursor: pointer;
+}
+.booked:hover{
+  /* pointer-events:none; */
+  cursor: not-allowed;
+}
+.booked{
+background-color: rgb(216, 215, 215);
 }
 .select-date-container-title {
   margin-top: 15px;
@@ -69,6 +76,9 @@
   justify-content: center;
   overflow: auto;
   height: 335px;
+  align-items: baseline;
+  align-content: flex-start;
+
 }
 .time-slots div {
   border: 1px solid #3171ca49;

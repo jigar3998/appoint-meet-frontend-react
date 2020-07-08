@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarBusiness from "../NavBar/NavBarBusiness";
+import NavBarApplication from "../NavBar/NavBarApplication";
 import "./Services.css";
 import ServicesTable from "../DataDisplay/ServicesTable";
 
@@ -12,7 +12,7 @@ import {Link } from "react-router-dom";
 function Services() {
   return (
     <>
-      <NavBarBusiness />
+      <NavBarApplication dropdowntype={"business"}/>
       <div className="services-container container-border" >
         <div className="services-list-title">
           Your Services

@@ -23,6 +23,7 @@
   padding-top: 30px;
   position: relative;
 }
+
 @media only screen and (max-width: 860px) {
   .business-home-container {
     flex-direction: column;
