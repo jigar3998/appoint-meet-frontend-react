@@ -14,7 +14,7 @@ const { Step } = Steps;
 function BookingStepMain(props) {
   const [current, setCurrent] = useState(0);
   const [width, setWidth] = useState(window.innerWidth);
-  const [bookingInfo,serBookingInfo]= useState({});
+  const [bookingInfo, serBookingInfo] = useState({});
   useEffect(() => {
     window.addEventListener("resize", updateWindowDimensions);
     return () => {
@@ -32,33 +32,52 @@ function BookingStepMain(props) {
   const prev = () => {
     setCurrent(current - 1);
   };
-  const handleServiceNext=(service)=>{
-    serBookingInfo({"service":service})
-    setCurrent(current + 1);}
-  const handleStaffNext=(staff)=>{
-    serBookingInfo({...bookingInfo,"staff":staff})
+  const handleServiceNext = (service) => {
+    serBookingInfo({ service: service });
     setCurrent(current + 1);
-  }
-  const handleSlotNext=(slot)=>{
-    serBookingInfo({...bookingInfo,"slot":slot})
+  };
+  const handleStaffNext = (staff) => {
+    serBookingInfo({ ...bookingInfo, staff: staff });
     setCurrent(current + 1);
-  }
+  };
+  const handleSlotNext = (slot) => {
+    serBookingInfo({ ...bookingInfo, slot: slot });
+    setCurrent(current + 1);
+  };
   const steps = [
     {
       title: "Service",
-      content: <FirstBookingStep handleServiceNext={handleServiceNext} business_id={props.business_id}/>,
+      content: (
+        <FirstBookingStep
+          handleServiceNext={handleServiceNext}
+          business_id={props.business_id}
+        />
+      ),
     },
     {
       title: "Staff",
-      content: <SecondBookingStep handleStaffNext={handleStaffNext} prev={prev}  service_id={bookingInfo.service}/>,
+      content: (
+        <SecondBookingStep
+          handleStaffNext={handleStaffNext}
+          prev={prev}
+          service_id={bookingInfo.service && bookingInfo.service.service_id}
+        />
+      ),
     },
     {
       title: "Time",
-      content: <ThirdBookingStep handleSlotNext={handleSlotNext} prev={prev} service_id={bookingInfo.service} staff_id={bookingInfo.staff} />,
+      content: (
+        <ThirdBookingStep
+          handleSlotNext={handleSlotNext}
+          prev={prev}
+          service_id={bookingInfo.service && bookingInfo.service.service_id}
+          staff_id={bookingInfo.staff && bookingInfo.staff.staff_id}
+        />
+      ),
     },
     {
       title: "Confirm",
-      content: <FourthBookingStep prev={prev} bookingInfo={bookingInfo}/>,
+      content: <FourthBookingStep prev={prev} bookingInfo={bookingInfo} />,
     },
   ];
   return (

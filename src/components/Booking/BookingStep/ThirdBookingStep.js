@@ -10,6 +10,7 @@ function ThirdBookingStep(props) {
   const [loading, setLoading] = useState(false);
   const [selectedTime, setSelectedTime] = useState(-1);
   const [timeSolts, setTimeSolts] = useState([]);
+  const [selectedDate, setSelectedDate] = useState([]);
 
   useEffect(() => {
     let today = new Date();
@@ -20,10 +21,12 @@ function ThirdBookingStep(props) {
     today = yyyy + "-" + mm + "-" + dd;
 
     loadSlots(today);
+    setSelectedDate(today)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let loadSlots = (date) => {
+    
     setLoading(true);
     axios
       .post(Url + "/booking_status/" + props.service_id, {
@@ -45,6 +48,8 @@ function ThirdBookingStep(props) {
   const onSelectDate = (value) => {
     // setSelectedDate(value);
     loadSlots(value.format("YYYY-MM-DD"));
+    setSelectedDate(value.format("YYYY-MM-DD"))
+  
   };
   const selectTime = (index) => {
     console.log(index);
@@ -98,7 +103,7 @@ function ThirdBookingStep(props) {
         <Button onClick={() => props.prev()}>Previous</Button>
         <Button
           type="primary"
-          onClick={() => props.handleSlotNext(selectedTime)}
+          onClick={() => props.handleSlotNext({...selectedTime,"date":selectedDate})}
           disabled={selectedTime === -1}
         >
           Next

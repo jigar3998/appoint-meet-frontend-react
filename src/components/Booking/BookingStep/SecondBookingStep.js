@@ -9,9 +9,9 @@ function SecondBookingStep(props) {
   const [disableButton, setDisableButton] = useState(true);
 
 
-  const onSelectChange = (key) => {
+  const onSelectChange = (key,row) => {
     // console.log("selectedRowKeys changed: ", selectedRowKeys);
-    setSelectedRowKey(key[0]);
+    setSelectedRowKey(row[0]);
     setDisableButton(false)
   };
   const updateWindowDimensions = () => {

@@ -19,6 +19,7 @@ import CustomerDashboard from "./components/Customer/Dashboard";
 import BusinessRoute from "./authentication/BusinessRoute";
 import CustomerRoute from "./authentication/CustomerRoute";
 import DefaultRoute from "./authentication/DefaultRoute";
+import BookingRoute from "./authentication/BookingRoute";
 import NotFound404 from "./components/NotFound404";
 
 import { GlobalContext } from "./context/GlobalState";
@@ -75,7 +76,7 @@ function App() {
             path="/customer/dashboard"
             component={() => <CustomerDashboard />}
           />
-          <CustomerRoute
+          <BookingRoute
             exact
             path="/booking/:id"
             component={() => <BookingHome />}

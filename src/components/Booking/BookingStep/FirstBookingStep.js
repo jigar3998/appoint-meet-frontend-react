@@ -14,9 +14,9 @@ function FirstBookingStep(props) {
       window.removeEventListener("resize", updateWindowDimensions);
     };
   }, []);
-  const onSelectChange = (key) => {
-    // console.log("selectedRowKeys changed: ", selectedRowKeys);
-    setSelectedRowKey(key[0]);
+  const onSelectChange = (key,row) => {
+    console.log("selectedRowKeys changed: ", key,row);
+    setSelectedRowKey(row[0]);
     setDisableButton(false)
   };
   const updateWindowDimensions = () => {

@@ -69,7 +69,7 @@ function Login(props) {
             {/* <h1>Sign Up</h1> */}
             <h2>Don’t have an account yet?</h2>
             <Link to="/signup?type=business" className="sign-up-options">
-              Sign Up as a Service Provider
+              Sign Up as a Business
             </Link>
             <Link to="/signup?type=customer" className="sign-up-options">
               Sign Up as a Customer
