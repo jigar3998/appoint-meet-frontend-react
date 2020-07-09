@@ -41,15 +41,15 @@ function NavBarCustomerDropdown() {
       </div>
 
       <div className="dropdown">
-        <Link to="/business/dashboard">
+        <Link to="/customer/dashboard">
           {" "}
           <div className="dropdown-item">Dashboard</div>
         </Link>
-        <Link to="/business/appointment">
+        <Link to="/customer/appointment">
           {" "}
           <div className="dropdown-item">My Appointment</div>
         </Link>
-        <Link to="#">
+        <Link to="/customer/account">
           {" "}
           <div className="dropdown-item">Account</div>
         </Link>

@@ -57,7 +57,7 @@ function NavBarBusinessDropdown() {
           {" "}
           <div className="dropdown-item">My Staff</div>
         </Link>
-        <Link to="#">
+        <Link to="/business/account">
           {" "}
           <div className="dropdown-item">Account</div>
         </Link>

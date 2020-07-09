@@ -15,7 +15,9 @@ import Services from "./components/Business/Services";
 import Staff from "./components/Business/Staff";
 import AddService from "./components/Business/AddService";
 import AddStaff from "./components/Business/AddStaff";
+import BusinessAccount from "./components/Business/Account";
 import CustomerDashboard from "./components/Customer/Dashboard";
+import CustomerAccount from "./components/Customer/Account";
 import BusinessRoute from "./authentication/BusinessRoute";
 import CustomerRoute from "./authentication/CustomerRoute";
 import DefaultRoute from "./authentication/DefaultRoute";
@@ -70,11 +72,21 @@ function App() {
             path="/business/add-staff"
             component={() => <AddStaff />}
           />
+          <BusinessRoute
+            exact
+            path="/business/account"
+            component={() => <BusinessAccount />}
+          />
 
           <CustomerRoute
             exact
             path="/customer/dashboard"
             component={() => <CustomerDashboard />}
+          />
+          <CustomerRoute
+            exact
+            path="/customer/account"
+            component={() => <CustomerAccount />}
           />
           <BookingRoute
             exact

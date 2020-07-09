@@ -1,0 +1,44 @@
+.account-container {
+  padding: 30px;
+  display: flex;
+  /* height: 500px; */
+  align-items: center;
+}
+.account-container .account-letf {
+  flex: 2;
+  /* padding: 20px; */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.account-container .account-right {
+  flex: 4;
+  padding: 5%;
+  width: 100%;
+}
+.account-container .user-illustration {
+  /* width: 50%; */
+  /* height: 100px; */
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+  height: 240px;
+  width: 240px;
+  padding: 50px;
+}
+.account-container .account-details {
+  margin: 20px;
+  /* padding: 20px; */
+}
+
+@media only screen and (max-width: 800px) {
+  .account-container {
+    flex-direction: column;
+  }
+  .account-container .account-letf {
+    flex: 1;
+  }
+  .account-container .account-right {
+    flex: 1;
+  }
+}

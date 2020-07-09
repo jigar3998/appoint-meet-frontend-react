@@ -1,13 +1,18 @@
-import React from 'react'
+import React from "react";
 import NavBarApplication from "../NavBar/NavBarApplication";
 
 function Dashboard() {
-    return (
+  return (
+    <div>
+      <NavBarApplication dropdowntype={"customer"} />
+      Customer Dashboard
+      <div className="dashboard-container">
         <div>
-            <NavBarApplication dropdowntype={"customer"}/>
-            Customer Dashboard
+          <div className="dashboard-statistic container-border">Stats</div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-export default Dashboard
+export default Dashboard;

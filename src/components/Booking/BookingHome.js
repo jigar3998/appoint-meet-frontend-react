@@ -9,6 +9,7 @@ import {
 } from "antd";
 
 import BookingStepMain from "./BookingStep/BookingStepMain";
+import NavBarApplication from "../NavBar/NavBarApplication";
 
 import "./BookingHome.css";
 import { Url } from "../../constants/ServerUrl";
@@ -42,7 +43,8 @@ function BookingHome() {
 
   return (
     <>
-      <h3>ID: {business_id}</h3>
+    <NavBarApplication dropdowntype={"customer"}/>
+      {/* <h3>ID: {business_id}</h3> */}
       <div className="business-home-container">
         <div className="business-left-container">
           {loading ? (
