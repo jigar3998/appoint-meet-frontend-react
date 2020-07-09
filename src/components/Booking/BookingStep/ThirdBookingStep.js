@@ -9,6 +9,7 @@ import axios from "axios";
 function ThirdBookingStep(props) {
   const [loading, setLoading] = useState(false);
   const [selectedTime, setSelectedTime] = useState(-1);
+  const [selectedTimeDate, setSelectedTimeDate] = useState(-1);
   const [timeSolts, setTimeSolts] = useState([]);
   const [selectedDate, setSelectedDate] = useState([]);
 
@@ -21,12 +22,11 @@ function ThirdBookingStep(props) {
     today = yyyy + "-" + mm + "-" + dd;
 
     loadSlots(today);
-    setSelectedDate(today)
+    setSelectedDate(today);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let loadSlots = (date) => {
-    
     setLoading(true);
     axios
       .post(Url + "/booking_status/" + props.service_id, {
@@ -48,12 +48,28 @@ function ThirdBookingStep(props) {
   const onSelectDate = (value) => {
     // setSelectedDate(value);
     loadSlots(value.format("YYYY-MM-DD"));
-    setSelectedDate(value.format("YYYY-MM-DD"))
-  
+    setSelectedDate(value.format("YYYY-MM-DD"));
   };
   const selectTime = (index) => {
     console.log(index);
+    index["start_time_slot"]=tConvert(index.start_time_slot.split(":")[0]+":"+index.start_time_slot.split(":")[1])
+    index["end_time_slot"]=tConvert(index.end_time_slot.split(":")[0]+":"+index.end_time_slot.split(":")[1])
     setSelectedTime(index);
+    setSelectedTimeDate(selectedDate);
+  };
+  let tConvert = (time) => {
+    // Check correct time format and split into components
+    time = time
+      .toString()
+      .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+    if (time.length > 1) {
+      // If time format correct
+      time = time.slice(1); // Remove full string match value
+      time[5] = +time[0] < 12 ? " AM" : " PM"; // Set AM/PM
+      time[0] = +time[0] % 12 || 12; // Adjust hours
+    }
+    return time.join(""); // return adjusted time or original string
   };
   return (
     <div className="select-time-step">
@@ -79,7 +95,10 @@ function ThirdBookingStep(props) {
           ) : (
             timeSolts.map((value) => {
               let classname = "";
-              if (selectedTime.slot_id === value.slot_id) {
+              if (
+                selectedTime.slot_id === value.slot_id &&
+                selectedTimeDate === selectedDate
+              ) {
                 classname = value.booked
                   ? "service-selected booked"
                   : "service-selected not-booked";
@@ -92,7 +111,7 @@ function ThirdBookingStep(props) {
                   onClick={() => !value.booked && selectTime(value)}
                   className={classname}
                 >
-                  {value.start_time_slot}
+                  {tConvert(value.start_time_slot.split(":")[0]+":"+value.start_time_slot.split(":")[1])}
                 </div>
               );
             })
@@ -103,7 +122,9 @@ function ThirdBookingStep(props) {
         <Button onClick={() => props.prev()}>Previous</Button>
         <Button
           type="primary"
-          onClick={() => props.handleSlotNext({...selectedTime,"date":selectedDate})}
+          onClick={() =>
+            props.handleSlotNext({ ...selectedTime, date: selectedTimeDate })
+          }
           disabled={selectedTime === -1}
         >
           Next
