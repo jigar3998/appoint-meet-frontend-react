@@ -36,17 +36,20 @@
   background-color: rgb(233, 233, 233);
   cursor: pointer;
 }
-.dropdown .button {
-  color: white;
+.login-button {
+  color:  var(--primary-color);
   border-radius: 5px;
-  background-color: var(--primary-color);
-  width: 80%;
-  padding: 5px;
-  margin: 10px auto;
+  background-color:white;
+  border: 1px solid var(--primary-color);
+  width:130px;
+  padding:4px;
+  padding-bottom: 5px;
+  /* margin: 10px auto; */
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.dropdown .button:hover {
-  background-color: var(--primary-color-dark);
+.login-button:hover {
+  color: white;
+  background-color: var(--primary-color);
 }

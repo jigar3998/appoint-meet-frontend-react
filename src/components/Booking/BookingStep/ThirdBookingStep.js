@@ -42,6 +42,8 @@ function ThirdBookingStep(props) {
         console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
+        setTimeSolts([]);
+
       });
   };
 
@@ -93,6 +95,7 @@ function ThirdBookingStep(props) {
           {loading ? (
             <LoadingOutlined style={{ fontSize: 24 }} spin />
           ) : (
+            timeSolts==="Sorry we are closed..."?("Sorry we are closed..."):(
             timeSolts.map((value) => {
               let classname = "";
               if (
@@ -114,7 +117,7 @@ function ThirdBookingStep(props) {
                   {tConvert(value.start_time_slot.split(":")[0]+":"+value.start_time_slot.split(":")[1])}
                 </div>
               );
-            })
+            }))
           )}
         </div>
       </div>
