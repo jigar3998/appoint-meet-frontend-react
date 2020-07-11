@@ -15,8 +15,13 @@ function Account() {
   return (
     <div>
       <NavBarApplication dropdowntype={"customer"} />
-      <div className="dashboard-container">
-        <div className="container-border account-container">
+      <div className="dashboard-container container-border">
+        <h2
+          style={{ fontSize: "25px", textAlign: "center", marginTop: "30px" }}
+        >
+          Account Information
+        </h2>
+        <div className=" account-container">
           <div className="account-letf ">
             <img
               src={User}

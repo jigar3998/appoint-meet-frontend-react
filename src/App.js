@@ -10,7 +10,8 @@ import SignUp from "./components/SignUp";
 import ProviderForm from "./components/Business/SignUpStepForm/StepFormMain";
 import BookingHome from "./components/Booking/BookingHome";
 import BusinessDashboard from "./components/Business/Dashboard";
-import Appointments from "./components/Business/Appointments";
+import BusinessUpcomingAppointments from "./components/Business/UpcomingAppointments";
+import BusinessCompletedAppointments from "./components/Business/CompletedAppointments";
 import Services from "./components/Business/Services";
 import Staff from "./components/Business/Staff";
 import AddService from "./components/Business/AddService";
@@ -18,6 +19,8 @@ import AddStaff from "./components/Business/AddStaff";
 import BusinessAccount from "./components/Business/Account";
 import CustomerDashboard from "./components/Customer/Dashboard";
 import CustomerAccount from "./components/Customer/Account";
+import CustomerUpcomingAppointments from "./components/Customer/UpcomingAppointments";
+import CompletedAppointments from "./components/Customer/CompletedAppointments";
 import BusinessRoute from "./authentication/BusinessRoute";
 import CustomerRoute from "./authentication/CustomerRoute";
 import DefaultRoute from "./authentication/DefaultRoute";
@@ -25,6 +28,9 @@ import BookingRoute from "./authentication/BookingRoute";
 import NotFound404 from "./components/NotFound404";
 
 import { GlobalContext } from "./context/GlobalState";
+
+import axios from "axios";
+axios.defaults.withCredentials = true
 
 function App() {
   const contextData = useContext(GlobalContext);
@@ -34,7 +40,7 @@ function App() {
     <Router>
       {contextData.isLoaded ? (
         <Switch>
-          <Route exact path="/" component={() => <Home />} />
+          <DefaultRoute exact path="/" component={() => <Home />} />
           <DefaultRoute exact path="/login" component={() => <Login />} />
           <DefaultRoute exact path="/signup" component={() => <SignUp />} />
           <BusinessRoute
@@ -49,8 +55,13 @@ function App() {
           />
           <BusinessRoute
             exact
-            path="/business/appointment"
-            component={() => <Appointments />}
+            path="/business/upcoming-appointments"
+            component={() => <BusinessUpcomingAppointments />}
+          />
+          <BusinessRoute
+            exact
+            path="/business/completed-appointments"
+            component={() => <BusinessCompletedAppointments />}
           />
           <BusinessRoute
             exact
@@ -87,6 +98,16 @@ function App() {
             exact
             path="/customer/account"
             component={() => <CustomerAccount />}
+          />
+          <CustomerRoute
+            exact
+            path="/customer/upcoming-appointments"
+            component={() => <CustomerUpcomingAppointments />}
+          />
+          <CustomerRoute
+            exact
+            path="/customer/completed-appointments"
+            component={() => <CompletedAppointments />}
           />
           <BookingRoute
             exact

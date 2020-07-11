@@ -7,7 +7,7 @@ import { Statistic, message } from "antd";
 import NavBarApplication from "../NavBar/NavBarApplication";
 import ServicesTable from "../DataDisplay/ServicesTable";
 import StaffTable from "../DataDisplay/StaffTable";
-import AppointmentTable from "../DataDisplay/AppointmentTable";
+import AppointmentTable from "./AppointmentTable";
 import CopyUrl from "./CopyUrl";
 import BusinessStatistic from "./BusinessStatistic";
 import BusinessInfo from "./BusinessInfo";
@@ -20,12 +20,10 @@ function Dashboard() {
   console.log(window.location.host);
   return (
     <>
-      <NavBarApplication dropdowntype={"business"}/>
+      <NavBarApplication dropdowntype={"business"} />
       <div className="dashboard-container">
-        <div>
-          <div className="dashboard-statistic container-border">
-          <BusinessStatistic/>
-          </div>
+        <div className="dashboard-statistic container-border">
+          <BusinessStatistic />
         </div>
         <div className="booking-url-container container-border">
           <CopyUrl
@@ -33,12 +31,18 @@ function Dashboard() {
             copytext={`http://${window.location.host}/booking/${contextData.loginData.business_id}`}
           />
         </div>
-        <div className="booking-url-container container-border">
-        <BusinessInfo/>
+        <div
+          className="booking-url-container container-border"
+          style={{ overflow: "auto" }}
+        >
+          <BusinessInfo />
         </div>
-        <div className="dashboard-list">
+       {/*  <div className="dashboard-list">
           <div className="dashboard-list-left">
-            <div className="container-border">
+            <div
+              className="container-border"
+              // style={{ overflow: "auto"}}
+            >
               <div className="dashboard-list-title">Upcoming Appointments</div>
               <Link to="/business/appointment">
                 <img
@@ -110,7 +114,7 @@ function Dashboard() {
               />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

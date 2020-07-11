@@ -9,7 +9,11 @@ function NavBarHome() {
   return (
     <nav class="main-nav-bar">
       <div className="nav-bar-container">
-        <div className="nav-bar-logo">Appoint Meet</div>
+        <div className="nav-bar-logo">
+        <Link to="/" style={{ color: "black" }}>
+            Appoint Meet
+          </Link>
+        </div>
         <div className="nav-bar-flex-1" />
         <div className="nav-bar-right-login">
           {/* <NavBarDropdown /> */}

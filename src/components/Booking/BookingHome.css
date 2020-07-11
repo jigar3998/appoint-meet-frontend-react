@@ -2,7 +2,7 @@
   display: flex;
   width: 90%;
   margin: 30px auto;
-  max-width: 1200px;
+  max-width: 1300px;
 }
 
 .business-left-container {
@@ -10,8 +10,10 @@
   border-radius: 5px;
   margin: 10px;
   height: 570px;
-  flex: 1;
+  flex: 1.5;
   padding: 20px;
+  overflow: auto;
+
 }
 .business-right-container {
   border: 1px solid #dadada;

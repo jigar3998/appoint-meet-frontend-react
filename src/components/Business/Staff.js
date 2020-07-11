@@ -14,7 +14,9 @@ function Staff() {
       <NavBarApplication dropdowntype={"business"}/>
       <div className="services-container container-border" style={{overflow:"auto"}}>
         <div className="services-list-title">
-          Your Staff
+        <h2 style={{fontSize:"22px"}}>Your Staff</h2>        
+
+          
           <div style={{ flex: 1 }} />
           <Link to="/business/add-staff">
             <Button className="services-add-button">

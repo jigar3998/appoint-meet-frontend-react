@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import NavBarApplication from "../NavBar/NavBarApplication";
 
-
 import User from "../../asserts/user.svg";
 import { GlobalContext } from "../../context/GlobalState";
 
@@ -14,8 +13,13 @@ function Account() {
   return (
     <div>
       <NavBarApplication dropdowntype={"business"} />
-      <div className="dashboard-container">
-        <div className="container-border account-container">
+      <div className="dashboard-container container-border">
+        <h2
+          style={{ fontSize: "25px", textAlign: "center", marginTop: "30px" }}
+        >
+          Account Information
+        </h2>
+        <div className=" account-container">
           <div className="account-letf ">
             <img
               src={User}

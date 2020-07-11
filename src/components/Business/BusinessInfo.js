@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 
-import { message, Skeleton, Descriptions } from "antd";
+import { message, Skeleton, Descriptions, Empty } from "antd";
 
 import { Url } from "../../constants/ServerUrl";
 import axios from "axios";
@@ -9,15 +9,15 @@ import { GlobalContext } from "../../context/GlobalState";
 function BusinessInfo() {
   const contextData = useContext(GlobalContext);
 
-  const [loading, setLoading] = useState(false);
-  const [businessInfo, setBusinessInfo] = useState(undefined);
+  const [loading, setLoading] = useState(true);
+  const [businessInfo, setBusinessInfo] = useState("NoData");
   let business_id = contextData.loginData.business_id;
   useEffect(() => {
-    loadbusinessInfo();
+    loadBusinessInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let loadbusinessInfo = () => {
+  let loadBusinessInfo = () => {
     setLoading(true);
     axios
       .get(Url + "/business/" + business_id)
@@ -30,6 +30,7 @@ function BusinessInfo() {
         console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
+        setBusinessInfo("NoData");
       });
   };
   let tConvert = (time) => {
@@ -56,13 +57,14 @@ function BusinessInfo() {
     "Saturday",
   ];
   return (
-    <div>
+    <div style={{ minWidth: "400px" }}>
       {loading ? (
         <Skeleton active loading={loading} />
+      ) : businessInfo === "NoData" ? (
+        <Empty />
       ) : (
-        businessInfo && (
-          <>
-            {/* <h2 style={{ marginLeft: "5px", marginRight: "5px" }}>
+        <>
+          {/* <h2 style={{ marginLeft: "5px", marginRight: "5px" }}>
               Business Info
             </h2>
             <hr />
@@ -81,43 +83,52 @@ function BusinessInfo() {
                 {time.open_time} to {time.close_time}
               </p>
             ))} */}
-            <Descriptions title={<h2>Business Information</h2>} bordered>
-              <Descriptions.Item label="Name" span={3}>
-                {businessInfo.business_name}
-              </Descriptions.Item>
-              <Descriptions.Item label="Category" span={3}>
-                {businessInfo.industry}
-              </Descriptions.Item>
-              <Descriptions.Item label="Description" span={3}>
-                {businessInfo.business_description}
-              </Descriptions.Item>
-              <Descriptions.Item label="Address" span={3}>
-                {businessInfo.business_address}
-              </Descriptions.Item>
-              <Descriptions.Item label="Open Hours" span={3}>
-                {/* sdfsdf <br /> */}
+          <Descriptions title={<h2>Business Information</h2>} bordered>
+            <Descriptions.Item label="Name" span={3}>
+              {businessInfo.business_name}
+            </Descriptions.Item>
+            <Descriptions.Item label="Category" span={3}>
+              {businessInfo.industry}
+            </Descriptions.Item>
+            <Descriptions.Item label="Description" span={3}>
+              {businessInfo.business_description}
+            </Descriptions.Item>
+            <Descriptions.Item label="Address" span={3}>
+              {businessInfo.business_address}
+            </Descriptions.Item>
+            <Descriptions.Item label="Open Hours" span={3}>
+              {/* sdfsdf <br /> */}
+              <table>
+                <tr>
+                  <th style={{ width: "90px" }}></th>
+                  <th></th>
+                </tr>
                 {businessInfo.time.map((time) => {
                   return (
-                    <div style={{marginBottom:"5px"}}>
-                      {week[time.day_of_week]} :{" "}
-                      {time.open_time === null ? "closed" : tConvert(
-                      time.open_time.split(":")[0] +
-                        ":" +
-                        time.open_time.split(":")[1]
-                    ) +
-                    " to " +
-                    tConvert(
-                      time.close_time.split(":")[0] +
-                        ":" +
-                        time.close_time.split(":")[1]
-                    )}
-                    </div>
+                    <tr>
+                      <td> {week[time.day_of_week]}</td>
+                      <td>
+                        {time.open_time === null
+                          ? "closed"
+                          : tConvert(
+                              time.open_time.split(":")[0] +
+                                ":" +
+                                time.open_time.split(":")[1]
+                            ) +
+                            " to " +
+                            tConvert(
+                              time.close_time.split(":")[0] +
+                                ":" +
+                                time.close_time.split(":")[1]
+                            )}
+                      </td>
+                    </tr>
                   );
                 })}
-              </Descriptions.Item>
-            </Descriptions>
-          </>
-        )
+              </table>
+            </Descriptions.Item>
+          </Descriptions>
+        </>
       )}
     </div>
   );

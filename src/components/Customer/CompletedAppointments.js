@@ -1,25 +1,24 @@
 import React from "react";
 import NavBarApplication from "../NavBar/NavBarApplication";
-import "./Appointments.css";
-import AppointmentTable from "../DataDisplay/AppointmentTable";
+import AppointmentTable from "./AppointmentTable";
 
-
-function Appointments() {
+function CompletedAppointments() {
   return (
     <>
-      <NavBarApplication dropdowntype={"business"}/>
+      <NavBarApplication dropdowntype={"customer"} />
       <div className="services-container container-border">
         <div className="services-list-title">
-          Your Upcoming Appointments
+          <h2 style={{ fontSize: "22px" }}>Your Completed Appointments</h2>
           <div style={{ flex: 1 }} />
         </div>
-        {/* <hr /> */}
 
         <div className="service-table">
           <AppointmentTable
             bordered={true}
             pagination={{ pageSize: 14 }}
-            tableWidth={[100, 70, 70, 50, 50]}
+            urlPath={"/customer/appointments/completed/"}
+
+            // tableWidth={[100, 70, 70, 50, 50]}
           />
         </div>
       </div>
@@ -27,4 +26,4 @@ function Appointments() {
   );
 }
 
-export default Appointments;
+export default CompletedAppointments;

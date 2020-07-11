@@ -168,9 +168,6 @@ function FourthStep(props) {
                             message: "Please enter Service Name",
                           },
                           {
-                            validator: checkDuplicateEntry,
-                          },
-                          {
                             max: 100,
                             message: "The input exceeds the length limit",
                           },

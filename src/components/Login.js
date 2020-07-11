@@ -51,12 +51,11 @@ function Login(props) {
         console.log(error.response);
         if (error.response && error.response.status === 400) {
           setLoading(false);
+          setInvalidLoginMessage(true);
         } else {
           message.error("Something went wrong. Please try again");
         }
         setLoading(false);
-
-        setInvalidLoginMessage(true);
       });
   };
 

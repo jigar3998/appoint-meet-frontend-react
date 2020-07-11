@@ -49,13 +49,13 @@ function StepFormMain() {
   // const prev = () => {
   //   setCurrent(current - 1);
   // };
-  const onAddServiceComplete=()=>{
+  const onAddServiceComplete = () => {
     history.push("/business/dashboard");
-
-  }
-  const onAddStaffComplete=()=>{
+    contextData.setRedirectToBusinessInfo(true);
+  };
+  const onAddStaffComplete = () => {
     setCurrent(current + 1);
-  }
+  };
   const steps = [
     {
       title: "Your Business",
@@ -67,11 +67,21 @@ function StepFormMain() {
     },
     {
       title: "Staff",
-      content: <ThirdStep onAddStaffComplete={onAddStaffComplete} ButtonName={"Next"} />,
+      content: (
+        <ThirdStep
+          onAddStaffComplete={onAddStaffComplete}
+          ButtonName={"Next"}
+        />
+      ),
     },
     {
       title: "Services",
-      content: <FourthStep onAddServiceComplete={onAddServiceComplete} ButtonName={"Next"} />,
+      content: (
+        <FourthStep
+          onAddServiceComplete={onAddServiceComplete}
+          ButtonName={"Next"}
+        />
+      ),
     },
   ];
   return (

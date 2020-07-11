@@ -1,12 +1,14 @@
 .home-outer-first {
   display: flex;
   /* height: 530px; */
-  width: 80%;
+  width: 90%;
+  max-width: 1300px;
   margin: auto;
 }
 .home-left {
   flex: 1;
   padding-bottom: 50px;
+  margin-top: 20px;
 }
 .home-right {
   flex: 1;

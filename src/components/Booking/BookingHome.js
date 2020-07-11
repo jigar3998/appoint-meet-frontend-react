@@ -1,107 +1,103 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { message, Result, Button } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
-import { message, Skeleton,Descriptions } from "antd";
-
+import BusinessInfo from "./BusinessInfo";
 import BookingStepMain from "./BookingStep/BookingStepMain";
 import NavBarApplication from "../NavBar/NavBarApplication";
 
-import "./BookingHome.css";
+import { useHistory, useParams } from "react-router-dom";
 import { Url } from "../../constants/ServerUrl";
 import axios from "axios";
 
+import "./BookingHome.css";
+
 function BookingHome() {
-  const [loading, setLoading] = useState(false);
-  const [businessInfo, setBusinessInfo] = useState(undefined);
+  let history = useHistory();
   let { id: business_id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    loadbusinessInfo();
+    checkBusiness();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let loadbusinessInfo = () => {
+  let checkBusiness = () => {
+    setError(false);
     setLoading(true);
     axios
-      .get(Url + "/business/" + business_id)
+      .get(Url + "/business/validity/" + business_id)
       .then(function (response) {
-        console.log(response.data);
-        setLoading(false);
-        setBusinessInfo(response.data);
+        console.log(response.data.Service_Valid);
+        if (response.data.Service_Valid === true) {
+          setLoading(false);
+        } else {
+          setLoading(false);
+          setError("NotValidBusinessId");
+        }
       })
       .catch(function (error) {
-        console.log(error.response);
+        console.log(error);
         message.error("Something went wrong. Please try again");
         setLoading(false);
+        setError("ServerError");
       });
   };
-  let tConvert = (time) => {
-    // Check correct time format and split into components
-    time = time
-      .toString()
-      .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
 
-    if (time.length > 1) {
-      // If time format correct
-      time = time.slice(1); // Remove full string match value
-      time[5] = +time[0] < 12 ? " AM" : " PM"; // Set AM/PM
-      time[0] = +time[0] % 12 || 12; // Adjust hours
-    }
-    return time.join(""); // return adjusted time or original string
-  };
-  let week = [
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-  ];
   return (
     <>
       <NavBarApplication dropdowntype={"customer"} />
-      {/* <h3>ID: {business_id}</h3> */}
-      <div className="business-home-container">
-        <div className="business-left-container">
-          {loading ? (
-            <Skeleton active loading={loading} />
-          ) : (
-            businessInfo && (
-              <>
-                <h1>{businessInfo.business_name}</h1>
-                <hr/>
-                <div style={{marginBottom:"5px"}}>Category:<br/>{businessInfo.industry}</div>
-                <div style={{marginBottom:"5px"}}>Description:<br/>{businessInfo.business_description}</div>
-                <div style={{marginBottom:"5px"}}>Address:<br/>{businessInfo.business_address}</div>
-                <div style={{marginBottom:"5px"}}>Open Hours:</div>
-                {businessInfo.time.map((time) => {
-                  return (
-                    <div style={{marginBottom:"2px"}}>
-                      {week[time.day_of_week]} :{" "}
-                      {time.open_time === null ? "closed" : tConvert(
-                      time.open_time.split(":")[0] +
-                        ":" +
-                        time.open_time.split(":")[1]
-                    ) +
-                    " to " +
-                    tConvert(
-                      time.close_time.split(":")[0] +
-                        ":" +
-                        time.close_time.split(":")[1]
-                    )}
-                    </div>
-                  );
-                })}
-
-              </>
-            )
-          )}
+      {loading ? (
+        <LoadingOutlined
+          spin
+          style={{fontSize: 40 , width: "100%", textAlign: "center" ,marginTop:"50px"}}
+        />
+      ) : error ? (
+        error === "NotValidBusinessId" ? (
+          <Result
+            status="warning"
+            title="Your Booking Url or Id is not valid"
+            extra={
+              <Button
+                type="primary"
+                onClick={() => {
+                  history.push("/customer/dashboard");
+                }}
+              >
+                Go to Dashboard
+              </Button>
+            }
+          />
+        ) : error === "ServerError" ? (
+          <Result
+            status="500"
+            title="500"
+            subTitle="Sorry, something went wrong."
+            extra={
+              <Button
+                type="primary"
+                onClick={() => {
+                  history.push("/customer/dashboard");
+                }}
+              >
+                Go to Dashboard
+              </Button>
+            }
+          />
+        ) : (
+          "Error"
+        )
+      ) : (
+        <div className="business-home-container">
+          <div className="business-left-container">
+            <BusinessInfo />
+          </div>
+          <div className="business-right-container">
+            <BookingStepMain business_id={business_id} />
+          </div>
         </div>
-        <div className="business-right-container">
-          <BookingStepMain business_id={business_id} />
-        </div>
-      </div>
+      )}
     </>
   );
 }

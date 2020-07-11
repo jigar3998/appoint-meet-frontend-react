@@ -40,9 +40,14 @@ function ThirdBookingStep(props) {
       })
       .catch(function (error) {
         console.log(error.response);
-        message.error("Something went wrong. Please try again");
         setLoading(false);
-        setTimeSolts([]);
+        if(error.response && error.response.status===400){
+          setTimeSolts([]);
+        }
+        else{
+          message.error("Something went wrong. Please try again");
+
+        }
 
       });
   };
@@ -54,8 +59,16 @@ function ThirdBookingStep(props) {
   };
   const selectTime = (index) => {
     console.log(index);
-    index["start_time_slot"]=tConvert(index.start_time_slot.split(":")[0]+":"+index.start_time_slot.split(":")[1])
-    index["end_time_slot"]=tConvert(index.end_time_slot.split(":")[0]+":"+index.end_time_slot.split(":")[1])
+    index["start_time_slot"] = tConvert(
+      index.start_time_slot.split(":")[0] +
+        ":" +
+        index.start_time_slot.split(":")[1]
+    );
+    index["end_time_slot"] = tConvert(
+      index.end_time_slot.split(":")[0] +
+        ":" +
+        index.end_time_slot.split(":")[1]
+    );
     setSelectedTime(index);
     setSelectedTimeDate(selectedDate);
   };
@@ -94,8 +107,11 @@ function ThirdBookingStep(props) {
           {/* <div>1 9:00 AM</div> */}
           {loading ? (
             <LoadingOutlined style={{ fontSize: 24 }} spin />
+          ) : timeSolts === "Sorry we are closed..." ? (
+            "Sorry we are closed..."
+          ) : timeSolts.length === 0 ? (
+            "No Data Available"
           ) : (
-            timeSolts==="Sorry we are closed..."?("Sorry we are closed..."):(
             timeSolts.map((value) => {
               let classname = "";
               if (
@@ -114,10 +130,14 @@ function ThirdBookingStep(props) {
                   onClick={() => !value.booked && selectTime(value)}
                   className={classname}
                 >
-                  {tConvert(value.start_time_slot.split(":")[0]+":"+value.start_time_slot.split(":")[1])}
+                  {tConvert(
+                    value.start_time_slot.split(":")[0] +
+                      ":" +
+                      value.start_time_slot.split(":")[1]
+                  )}
                 </div>
               );
-            }))
+            })
           )}
         </div>
       </div>

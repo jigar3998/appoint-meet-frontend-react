@@ -15,7 +15,9 @@ function Services() {
       <NavBarApplication dropdowntype={"business"}/>
       <div className="services-container container-border" >
         <div className="services-list-title">
-          Your Services
+        <h2 style={{fontSize:"22px"}}>Your Services</h2>        
+
+          
           <div style={{ flex: 1 }} />
           <Link to="/business/add-service">
 
