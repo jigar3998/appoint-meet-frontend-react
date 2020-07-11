@@ -6,13 +6,12 @@ import {
 import { Form, Input, Button,  message } from "antd";
 import LoginNavBar from "./NavBar/LoginNavBar";
 
-import "./Login.css";
 
 import axios from "axios";
-
 import { Url } from "../constants/ServerUrl";
-
 import { GlobalContext } from "../context/GlobalState";
+
+import "./Login.css";
 
 function Login(props) {
   let history = useHistory();
@@ -65,7 +64,6 @@ function Login(props) {
       <div className="login-outer">
         <div className="login-left">
           <div className="sign-up-outer">
-            {/* <h1>Sign Up</h1> */}
             <h2>Don’t have an account yet?</h2>
             <Link to="/signup?type=business" className="sign-up-options">
               Sign Up as a Business

@@ -3,12 +3,11 @@ import {  useHistory } from "react-router-dom";
 import { Form, Input, Button,  message } from "antd";
 import LoginNavBar from "./NavBar/LoginNavBar";
 
-import "./SignUp.css";
-
 import axios from "axios";
 import { Url } from "../constants/ServerUrl";
 import {GlobalContext} from "../context/GlobalState";
 
+import "./SignUp.css";
 function SignUp() {
   let history = useHistory();
   const contextData = useContext(GlobalContext)

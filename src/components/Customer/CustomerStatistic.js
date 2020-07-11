@@ -7,31 +7,29 @@ import { GlobalContext } from "../../context/GlobalState";
 
 function CustomerStatistic() {
   const contextData = useContext(GlobalContext);
-  // change
-  const [loading, setLoading] = useState(false);
-  const [businessStats, setBusinessStats] = useState("NoData");
-  let business_id = contextData.loginData.business_id;
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState("NoData");
+  let user_id = contextData.loginData.user_id;
 
   useEffect(() => {
-    // change
-    // loadbusinessStats();
+    loadstats();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let loadbusinessStats = () => {
+  let loadstats = () => {
     setLoading(true);
     axios
-      .get(Url + "/business/stats/" + business_id)
+      .get(Url + "/customer/stats/" + user_id)
       .then(function (response) {
         console.log(response.data);
         setLoading(false);
-        setBusinessStats(response.data);
+        setStats(response.data);
       })
       .catch(function (error) {
         console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
-        setBusinessStats("NoData");
+        setStats("NoData");
       });
   };
 
@@ -43,17 +41,16 @@ function CustomerStatistic() {
           loading={loading}
           paragraph={{ rows: 2, width: "100%" }}
         />
-      ) : // change
-      // ) : businessStats === "NoData" ? (
-      false ? (
+      ) : 
+      stats === "NoData" ? (
         <Empty style={{ width: "100%" }} />
       ) : (
         <>
           <div style={{ flex: "1", textAlign: "center" }}>
-            <Statistic title="Total Booked Appointments" value={500} />
+            <Statistic title="Total Booked Appointments" value={stats.totalAppointments} />
           </div>
           <div style={{ flex: "1", textAlign: "center" }}>
-            <Statistic title="Total Upcoming Appointments" value={15} />
+            <Statistic title="Total Upcoming Appointments" value={stats.upcomingAppointments} />
           </div>
         </>
       )}

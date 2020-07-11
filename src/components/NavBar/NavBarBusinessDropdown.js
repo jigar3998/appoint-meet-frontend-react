@@ -15,29 +15,40 @@ function NavBarBusinessDropdown() {
   const contextData = useContext(GlobalContext);
   const name = contextData.loginData.first_name;
   let handleLogout = () => {
-    message.loading({ content: 'Loading...', key:"logout" });
+    message.loading({ content: "Loading...", key: "logout" });
     axios
       .get(Url + "/users/logout")
-      .then(function (response) {
+      .then(async (response) => {
         console.log(response.data);
-        if (response.data.logout===true) {
+        if (response.data.logout === true) {
           // to reset global state
-          contextData.setLoginData({});
+          // history.push("/");
+
+          await contextData.setLoginData({});
           // contextData.setIsLoaded(false)
-          contextData.setRedirectToBusinessInfo(true);
+          await contextData.setRedirectToBusinessInfo(true);
           localStorage.clear();
           history.push("/");
-          message.success({ content: 'You have been successfully logged out.', key:"logout", duration: 2 });
-  
+          message.success({
+            content: "You have been successfully logged out.",
+            key: "logout",
+            duration: 2,
+          });
         } else {
-          message.error({ content: "Something went wrong. Please try again", key:"logout", duration: 2 });
-
+          message.error({
+            content: "Something went wrong. Please try again",
+            key: "logout",
+            duration: 2,
+          });
         }
       })
       .catch(function (error) {
         console.log(error.response);
-        message.error({ content: "Something went wrong. Please try again", key:"logout", duration: 2 });
-
+        message.error({
+          content: "Something went wrong. Please try again",
+          key: "logout",
+          duration: 2,
+        });
       });
   };
   return (

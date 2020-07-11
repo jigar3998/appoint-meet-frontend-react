@@ -1,3 +1,3 @@
 module.exports = {
-  Url: "http://localhost:4000",
+  Url: "https://appoint-meet.herokuapp.com/",
 };

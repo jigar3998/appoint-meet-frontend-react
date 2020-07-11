@@ -27,7 +27,7 @@ function AppointmentTable(props) {
       .then(function (response) {
         console.log(response.data);
         setLoading(false);
-        if (response.data === "You have no completed appointments") {
+        if (response.data === "You have no appointments") {
           setData([]);
         } else {
           setData(response.data);
