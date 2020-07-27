@@ -61,7 +61,7 @@ function BookFromSearchName() {
         >
           {businessInfo.map((info, index) => (
             <Option key={index} value={info.business_id}>
-              {info.business_address}
+              {info.business_name}
             </Option>
           ))}
         </Select>

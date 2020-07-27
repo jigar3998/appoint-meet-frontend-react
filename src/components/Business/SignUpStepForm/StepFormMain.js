@@ -52,6 +52,8 @@ function StepFormMain() {
   const onAddServiceComplete = () => {
     history.push("/business/dashboard");
     contextData.setRedirectToBusinessInfo(true);
+    setCurrent(0);
+
   };
   const onAddStaffComplete = () => {
     setCurrent(current + 1);
