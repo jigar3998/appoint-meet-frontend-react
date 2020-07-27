@@ -35,7 +35,7 @@ axios.defaults.withCredentials = true
 function App() {
   const contextData = useContext(GlobalContext);
 
-  console.log(contextData);
+  // console.log(contextData);
   return (
     <Router>
       {contextData.isLoaded ? (

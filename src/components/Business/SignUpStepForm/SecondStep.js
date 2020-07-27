@@ -42,9 +42,9 @@ function SecondStep(props) {
     }
 
     setLoading(true);
-    console.log("Success:", values);
-    console.log("Success:", timeDetails);
-    console.log("Success:", props.businessInfo);
+    // console.log("Success:", values);
+    // console.log("Success:", timeDetails);
+    // console.log("Success:", props.businessInfo);
 
     axios
       .post(Url + "/business/signup/" + contextData.loginData.user_id, {
@@ -55,12 +55,12 @@ function SecondStep(props) {
         time: timeDetails,
       })
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setLoading(false);
         setData(response)
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
       });

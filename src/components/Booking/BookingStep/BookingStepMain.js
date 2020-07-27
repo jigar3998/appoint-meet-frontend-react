@@ -22,7 +22,7 @@ function BookingStepMain(props) {
     };
   }, []);
   const updateWindowDimensions = () => {
-    console.log(window.innerWidth);
+    // console.log(window.innerWidth);
     setWidth(window.innerWidth);
   };
   const next = () => {

@@ -25,7 +25,7 @@ function AppointmentTable(props) {
       .get(Url + props.urlPath + business_id)
       // .get(Url + props.urlPath + 28)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setLoading(false);
         if (response.data === "You have no appointments") {
           setData([]);
@@ -34,7 +34,7 @@ function AppointmentTable(props) {
         }
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
       });

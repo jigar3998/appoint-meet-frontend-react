@@ -36,12 +36,12 @@ function ProviderTable(props) {
       .get(Url + requesurl)
       // .get(Url + "/staff/" + "29")
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setLoading(false);
         setData(response.data);
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
       });

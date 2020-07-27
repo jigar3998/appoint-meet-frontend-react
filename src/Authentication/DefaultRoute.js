@@ -9,7 +9,7 @@ const DefaultRoute = ({
   ...rest
 }) => {
   const contextData = useContext(GlobalContext)
-  console.log("from default authintiacation",contextData)
+  // console.log("from default authintiacation",contextData)
   return (
     <Route
       {...rest}

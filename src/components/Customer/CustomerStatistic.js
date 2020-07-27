@@ -21,12 +21,12 @@ function CustomerStatistic() {
     axios
       .get(Url + "/customer/stats/" + user_id)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setLoading(false);
         setStats(response.data);
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
         setStats("NoData");

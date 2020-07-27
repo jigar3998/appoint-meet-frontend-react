@@ -29,7 +29,7 @@ function BookingHome() {
     axios
       .get(Url + "/business/validity/" + business_id)
       .then(function (response) {
-        console.log(response.data.Service_Valid);
+        // console.log(response.data.Service_Valid);
         if (response.data.Service_Valid === true) {
           setLoading(false);
         } else {
@@ -38,7 +38,7 @@ function BookingHome() {
         }
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
         message.error("Something went wrong. Please try again");
         setLoading(false);
         setError("ServerError");

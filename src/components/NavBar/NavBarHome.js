@@ -7,7 +7,7 @@ import "./NavBarHome.css";
 
 function NavBarHome() {
   return (
-    <nav class="main-nav-bar">
+    <nav className="main-nav-bar">
       <div className="nav-bar-container">
         <div className="nav-bar-logo">
         <Link to="/" style={{ color: "black" }}>

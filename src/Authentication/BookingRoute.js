@@ -6,9 +6,9 @@ import { GlobalContext } from "../context/GlobalState";
 import { message } from "antd";
 
 const BookingRoute = ({ component: Component, ...rest }) => {
-  console.log(window.location);
+  // console.log(window.location);
   const contextData = useContext(GlobalContext);
-  console.log("from business authintiacation", contextData);
+  // console.log("from business authintiacation", contextData);
   return (
     <Route
       {...rest}

@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "nodemon -w craco.config.js -w ./antd.customize.less --exec craco start",
-    "build": "craco build",
+    "build": "nodemon -w craco.config.js -w ./antd.customize.less --exec craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },

@@ -1,23 +1,17 @@
 import React, { useContext } from "react";
 import "./Dashboard.css";
 
-import { Link } from "react-router-dom";
-import { Statistic, message } from "antd";
 
 import NavBarApplication from "../NavBar/NavBarApplication";
-import ServicesTable from "../DataDisplay/ServicesTable";
-import StaffTable from "../DataDisplay/StaffTable";
-import AppointmentTable from "./AppointmentTable";
 import CopyUrl from "./CopyUrl";
 import BusinessStatistic from "./BusinessStatistic";
 import BusinessInfo from "./BusinessInfo";
-import ExternalLink from "../../asserts/external-link.svg";
 
 import { GlobalContext } from "../../context/GlobalState";
 
 function Dashboard() {
   const contextData = useContext(GlobalContext);
-  console.log(window.location.host);
+  // console.log(window.location.host);
   return (
     <>
       <NavBarApplication dropdowntype={"business"} />

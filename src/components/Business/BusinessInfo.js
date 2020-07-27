@@ -22,12 +22,12 @@ function BusinessInfo() {
     axios
       .get(Url + "/business/" + business_id)
       .then(function (response) {
-        console.log("hmrtygrtvhehf", response.data);
+        // console.log("hmrtygrtvhehf", response.data);
         setLoading(false);
         setBusinessInfo(response.data);
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
         setBusinessInfo("NoData");

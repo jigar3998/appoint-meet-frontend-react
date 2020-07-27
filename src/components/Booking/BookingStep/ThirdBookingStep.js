@@ -34,12 +34,12 @@ function ThirdBookingStep(props) {
         booking_date: date,
       })
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setLoading(false);
         setTimeSolts(response.data);
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         setLoading(false);
         if(error.response && error.response.status===400){
           setTimeSolts([]);

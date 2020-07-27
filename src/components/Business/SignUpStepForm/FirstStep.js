@@ -4,7 +4,7 @@ function FirstStep(props) {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    console.log(values);
+    // console.log(values);
     props.BusinessInfoNext(values);
   };
   const submitForm1 = () => {

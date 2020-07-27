@@ -9,6 +9,8 @@
   flex: 1;
   padding-bottom: 50px;
   margin-top: 20px;
+  /* background-color: tomato; */
+  /* width: 80%; */
 }
 .home-right {
   flex: 1;
@@ -34,5 +36,12 @@
 @media only screen and (max-width: 800px) {
   .home-outer-first {
     flex-direction: column-reverse;
+  }
+  .home-left {
+    width:80% ;
+    margin: auto;
+  }
+  .home-left h1 {
+    font-size: 40px;
   }
 }

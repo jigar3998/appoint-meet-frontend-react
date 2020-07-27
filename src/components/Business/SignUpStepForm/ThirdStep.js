@@ -16,9 +16,9 @@ function ThirdStep(props) {
 
 
   const onFinish = (values) => {
-    console.log("Received values of form:", values);
+    // console.log("Received values of form:", values);
     let requestBody=values.staff
-    console.log(requestBody)
+    // console.log(requestBody)
     
     setLoading(true);
 
@@ -26,12 +26,12 @@ function ThirdStep(props) {
       .post(Url + "/business/staff/" + contextData.loginData.business_id, requestBody)
       // .post(Url + "/business/staff/" + "29", requestBody)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setLoading(false);
         props.onAddStaffComplete();
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
       });

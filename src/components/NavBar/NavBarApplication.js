@@ -3,13 +3,13 @@ import React from "react";
 import NavBarBusinessDropdown from "./NavBarBusinessDropdown";
 import NavBarCustomerDropdown from "./NavBarCustomerDropdown";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./NavBarApplication.css";
 
 function NavBarApplication(props) {
   return (
-    <nav class="main-nav-bar">
+    <nav className="main-nav-bar">
       <div className="nav-bar-container">
         <div className="nav-bar-logo">
           <Link to="/" style={{ color: "black" }}>

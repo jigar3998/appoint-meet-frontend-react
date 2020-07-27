@@ -11,6 +11,7 @@ function FourthBookingStep(props) {
   const [loading, setLoading] = useState(false);
 
   let book = () => {
+    setLoading(true)
     axios
       .post(Url + "/booking/" + contextData.loginData.user_id, {
         slot_id: props.bookingInfo.slot.slot_id,
@@ -18,18 +19,18 @@ function FourthBookingStep(props) {
         booking_date: props.bookingInfo.slot.date,
       })
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setLoading(false);
         message.success("appointment booked successfully.");
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
       });
   };
 
-  console.log(props.bookingInfo);
+  // console.log(props.bookingInfo);
   return (
     <div className="booking-confirm-container">
       <Descriptions title={<h2>Booking Information</h2>} bordered>

@@ -22,7 +22,7 @@ function ServicesTable(props) {
     loadService();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log("ServicesTable", props.business_id);
+  // console.log("ServicesTable", props.business_id);
 
   let loadService = () => {
     setLoading(true);
@@ -30,12 +30,12 @@ function ServicesTable(props) {
       .get(Url + "/service/" + business_id)
       // .get(Url + "/service/" + "29")
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setLoading(false);
         setData(response.data);
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
       });
@@ -160,7 +160,7 @@ function ServicesTable(props) {
                     Service description : {record.service_description}
                   </p>
                 ),
-                expandRowByClick: true,
+                expandRowByClick: props.expandRowByClick,
               }
             : {}
         }

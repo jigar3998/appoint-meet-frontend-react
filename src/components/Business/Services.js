@@ -35,6 +35,8 @@ function Services() {
             bordered={true}
             pagination={{ pageSize: 8 }}
             expandable={true}
+          expandRowByClick={true}
+
             // tableWidth={[70, 40, 40]}
           />
         </div>

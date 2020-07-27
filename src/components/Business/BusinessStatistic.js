@@ -21,12 +21,12 @@ function BusinessStatistic() {
     axios
       .get(Url + "/business/stats/" + business_id)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setLoading(false);
         setBusinessStats(response.data);
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
         setBusinessStats("NoData");

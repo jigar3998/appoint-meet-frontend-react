@@ -28,16 +28,16 @@ function SignUp() {
     setEmailAlreadyExists(false);
     setLoading(true);
     values.access=type
-    console.log("Success:", values);
+    // console.log("Success:", values);
     axios
       .post(Url + "/users/signup", values)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         contextData.setLoginData(response.data)
         history.push("/business/business-info");
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         if (error.response && error.response.status === 400 && error.response.data.error_message==="email already exists") {
           setEmailAlreadyExists(true);
         } else {
@@ -48,7 +48,7 @@ function SignUp() {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    // console.log("Failed:", errorInfo);
   };
 
   return (

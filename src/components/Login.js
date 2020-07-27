@@ -22,7 +22,7 @@ function Login(props) {
   const onFinish = (values) => {
     setInvalidLoginMessage(false);
     setLoading(true);
-    console.log("Success:", values);
+    // console.log("Success:", values);
     axios
       .post(Url + "/users/login", {
         email: values.email,
@@ -30,7 +30,7 @@ function Login(props) {
       })
       .then(function (response) {
         setLoading(false);
-        console.log(response.data);
+        // console.log(response.data);
 
         if (response.data.access === "customer") {
           contextData.setLoginData(response.data);
@@ -47,7 +47,7 @@ function Login(props) {
         }
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         if (error.response && error.response.status === 400) {
           setLoading(false);
           setInvalidLoginMessage(true);

@@ -24,21 +24,21 @@ function FourthStep(props) {
 
 
   const onFinish = (values) => {
-    console.log("Received values of form:", values);
+    // console.log("Received values of form:", values);
     // props.next();
     setLoading(true);
     let requestBody=values.services
     axios
       .post(Url + "/business/service/" + contextData.loginData.business_id, requestBody)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setLoading(false);
         props.onAddServiceComplete()
 
 
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error("Something went wrong. Please try again");
         setLoading(false);
       });
@@ -47,7 +47,7 @@ function FourthStep(props) {
     form.submit();
   };
   const checkTime = (rule, value) => {
-    console.log(!value === undefined);
+    // console.log(!value === undefined);
     if (!(value === undefined)) {
       if (value < 5) {
         return Promise.reject("Minimum 5 Minutes Required");
@@ -68,14 +68,14 @@ function FourthStep(props) {
     }
   };
   const checkDuplicateEntry = (rule, value) => {
-    console.log("checkDuplicateEntry", value);
+    // console.log("checkDuplicateEntry", value);
     let formAllData = form.getFieldValue().services;
 
     let sameServiceName = false;
     let sameServiceNameCount = 0;
-    console.log("checkDuplicateEntry", formAllData);
+    // console.log("checkDuplicateEntry", formAllData);
     for (let i of formAllData) {
-      console.log(i);
+      // console.log(i);
       if (i) {
         let serviceName = i.serviceName;
         if (serviceName === value) {
@@ -109,7 +109,7 @@ function FourthStep(props) {
       .get(Url + "/staff/" + contextData.loginData.business_id)
       // .get(Url + "/staff/" + "2")
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setIsStaffLoaded(false);
         let staffElementT=[]
         let staffKeyT=[]
@@ -125,16 +125,16 @@ function FourthStep(props) {
         setStaffKey(staffKeyT)
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error("Something went wrong. Please try again");
       });
   }
   const handleOnSelect = (value, fieldKey) => {
-    console.log("A" ,value,fieldKey,form.getFieldValue().services )
+    // console.log("A" ,value,fieldKey,form.getFieldValue().services )
       // eslint-disable-next-line eqeqeq
     if (value == "select-all") {
       let formAllData = form.getFieldValue().services;
-      console.log(formAllData[fieldKey], staffKey.length);
+      // console.log(formAllData[fieldKey], staffKey.length);
       // eslint-disable-next-line eqeqeq
       if (formAllData[fieldKey]["staff_list"].length == staffKey.length + 1) {
         formAllData[fieldKey]["staff_list"] = [];

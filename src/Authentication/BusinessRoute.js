@@ -5,7 +5,7 @@ import { GlobalContext } from "../context/GlobalState";
 
 const BusinessRoute = ({ component: Component, ...rest }) => {
   const contextData = useContext(GlobalContext);
-  console.log("from business authintiacation");
+  // console.log("from business authintiacation");
   return (
     <Route
       {...rest}

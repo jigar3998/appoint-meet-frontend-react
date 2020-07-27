@@ -12,15 +12,15 @@ function BookFromUrl() {
 
   let checkBusiness = (url) => {
     try {
-      if (Number.isInteger(+url)) {
+      if (url!=="" && Number.isInteger(+url)) {
         history.push("/booking/" +url);
         return;
       }
-      console.log(window.location.host);
+      // console.log(window.location.host);
       url = new URL(url);
-      console.log(url);
+      // console.log(url);
       let pathname = url.pathname.split("/");
-      console.log(pathname);
+      // console.log(pathname);
       if (
         window.location.host === url.host &&
         pathname[1] === "booking" &&
@@ -31,7 +31,7 @@ function BookFromUrl() {
         message.error("Please Enter Valid Url or ID");
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       message.error("Please Enter Valid Url or ID");
     }
   };
@@ -43,7 +43,7 @@ function BookFromUrl() {
           onSearch={(value) => checkBusiness(value)}
           enterButton={"Book"}
           size="large"
-          placeholder="Enter Url or ID"
+          placeholder="Enter Business Url or Business ID"
         />
       </div>
     </>

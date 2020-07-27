@@ -15,7 +15,7 @@ function SecondBookingStep(props) {
     setDisableButton(false)
   };
   const updateWindowDimensions = () => {
-    console.log(window.innerWidth);
+    // console.log(window.innerWidth);
     setWidth(window.innerWidth);
   };
   useEffect(() => {

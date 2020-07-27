@@ -19,7 +19,7 @@ function NavBarCustomerDropdown() {
     axios
       .get(Url + "/users/logout")
       .then(async (response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data.logout === true) {
           // to reset global state
           // history.push("/");
@@ -43,7 +43,7 @@ function NavBarCustomerDropdown() {
         }
       })
       .catch(function (error) {
-        console.log(error.response);
+        // console.log(error.response);
         message.error({
           content: "Something went wrong. Please try again",
           key: "logout",

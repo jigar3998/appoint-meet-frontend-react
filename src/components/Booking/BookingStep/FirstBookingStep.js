@@ -15,12 +15,12 @@ function FirstBookingStep(props) {
     };
   }, []);
   const onSelectChange = (key,row) => {
-    console.log("selectedRowKeys changed: ", key,row);
+    // console.log("selectedRowKeys changed: ", key,row);
     setSelectedRowKey(row[0]);
     setDisableButton(false)
   };
   const updateWindowDimensions = () => {
-    console.log(window.innerWidth);
+    // console.log(window.innerWidth);
     setWidth(window.innerWidth);
   };
   const handleNext = () => {
@@ -40,6 +40,9 @@ function FirstBookingStep(props) {
           scroll={width < 560 ? { x: 460 } : {}}
           tableWidth={[200, 100, 100]}
           business_id={props.business_id}
+          expandable={true}
+          expandRowByClick={false}
+
         />
       </div>
       <div className="signup-navigation-button">

@@ -10,7 +10,7 @@ const CustomerRoute = ({
   ...rest
 }) => {
   const contextData = useContext(GlobalContext)
-  console.log("from business authintiacation",contextData)
+  // console.log("from business authintiacation",contextData)
   return (
     <Route
       {...rest}
