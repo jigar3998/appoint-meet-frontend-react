@@ -21,8 +21,8 @@ function Dashboard() {
         </div>
         <div className="booking-url-container container-border">
           <CopyUrl
-            title={`Your Booking Url : http://${window.location.host}/booking/${contextData.loginData.business_id}`}
-            copytext={`http://${window.location.host}/booking/${contextData.loginData.business_id}`}
+            title={`Your Booking Url : https://${window.location.host}/booking/${contextData.loginData.business_id}`}
+            copytext={`https://${window.location.host}/booking/${contextData.loginData.business_id}`}
           />
         </div>
         <div
